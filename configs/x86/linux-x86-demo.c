@@ -151,7 +151,7 @@ struct {
 			.domain = 0x0,
 			.bdf = 0x0e << 3,
 			.bar_mask = {
-				0xfffff000, 0xffffffe0, 0x00000000,
+				0xfffff000, 0xfffffe00, 0x00000000,
 				0x00000000, 0x00000000, 0x00000000,
 			},
 			.num_msix_vectors = 1,
