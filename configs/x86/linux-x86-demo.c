@@ -154,7 +154,7 @@ struct {
 				0xfffff000, 0xfffffe00, 0x00000000,
 				0x00000000, 0x00000000, 0x00000000,
 			},
-			.num_msix_vectors = 1,
+			.num_msix_vectors = 3,
 			.shmem_regions_start = 3,
 			.shmem_dev_id = 1,
 			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_VETH,
