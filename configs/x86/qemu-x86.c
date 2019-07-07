@@ -318,6 +318,7 @@ struct {
 			.num_msix_vectors = 3,
 			.shmem_regions_start = 14,
 			.shmem_dev_id = 0,
+			.shmem_peers = 2,
 			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_VETH,
 		},
 		{ /* IVSHMEM (demo) */
@@ -331,6 +332,7 @@ struct {
 			.num_msix_vectors = 16,
 			.shmem_regions_start = 18,
 			.shmem_dev_id = 0,
+			.shmem_peers = 2,
 			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_UNDEFINED,
 		},
 	},
