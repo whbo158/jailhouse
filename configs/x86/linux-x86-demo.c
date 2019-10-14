@@ -19,17 +19,17 @@ struct {
 	struct jailhouse_cell_desc cell;
 	__u64 cpus[1];
 #ifdef CONFIG_QEMU_E1000E_ASSIGNMENT
-	struct jailhouse_memory mem_regions[16];
+	struct jailhouse_memory mem_regions[20];
 #else
-	struct jailhouse_memory mem_regions[12];
+	struct jailhouse_memory mem_regions[16];
 #endif
 	struct jailhouse_cache cache_regions[1];
 	struct jailhouse_irqchip irqchips[1];
 	struct jailhouse_pio pio_regions[3];
 #ifdef CONFIG_QEMU_E1000E_ASSIGNMENT
-	struct jailhouse_pci_device pci_devices[3];
+	struct jailhouse_pci_device pci_devices[4];
 #else
-	struct jailhouse_pci_device pci_devices[2];
+	struct jailhouse_pci_device pci_devices[3];
 #endif
 	struct jailhouse_pci_capability pci_caps[6];
 } __attribute__((packed)) config = {
@@ -71,11 +71,27 @@ struct {
 		/* high RAM */ {
 			.phys_start = 0x3a700000,
 			.virt_start = 0x00200000,
-			.size = 0x4a00000,
+			.size = 0x4900000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_DMA |
 				JAILHOUSE_MEM_LOADABLE,
 		},
+		/* IVSHMEM shared memory region (virtio-con front) */
+		{
+			.phys_start = 0x3f0f0000,
+			.virt_start = 0x3f0f0000,
+			.size = 0x1000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
+		},
+		{
+			.phys_start = 0x3f0f1000,
+			.virt_start = 0x3f0f1000,
+			.size = 0xf000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_ROOTSHARED,
+		},
+		{ 0 },
+		{ 0 },
 		/* IVSHMEM shared memory regions (networking) */
 		{
 			.phys_start = 0x3f100000,
@@ -190,13 +206,28 @@ struct {
 		{
 			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
 			.domain = 0x0,
-			.bdf = 0x0e << 3,
+			.bdf = 0x0d << 3,
 			.bar_mask = {
 				0xfffff000, 0xfffffe00, 0x00000000,
 				0x00000000, 0x00000000, 0x00000000,
 			},
 			.num_msix_vectors = 3,
 			.shmem_regions_start = 3,
+			.shmem_dev_id = 1,
+			.shmem_peers = 2,
+			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_VIRTIO_FRONT +
+				VIRTIO_DEV_CONSOLE,
+		},
+		{
+			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
+			.domain = 0x0,
+			.bdf = 0x0e << 3,
+			.bar_mask = {
+				0xfffff000, 0xfffffe00, 0x00000000,
+				0x00000000, 0x00000000, 0x00000000,
+			},
+			.num_msix_vectors = 3,
+			.shmem_regions_start = 7,
 			.shmem_dev_id = 1,
 			.shmem_peers = 2,
 			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_VETH,
@@ -210,7 +241,7 @@ struct {
 				0x00000000, 0x00000000, 0x00000000,
 			},
 			.num_msix_vectors = 16,
-			.shmem_regions_start = 7,
+			.shmem_regions_start = 11,
 			.shmem_dev_id = 2,
 			.shmem_peers = 3,
 			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_UNDEFINED,
