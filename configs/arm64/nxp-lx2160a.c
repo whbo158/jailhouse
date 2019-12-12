@@ -27,13 +27,13 @@ struct {
 		.revision = JAILHOUSE_CONFIG_REVISION,
 		.flags = JAILHOUSE_SYS_VIRTUAL_DEBUG_CONSOLE,
 		.hypervisor_memory = {
-			.phys_start = 0xb7c00000,
-			.size =       0x00400000,
+			.phys_start = 0xc0000000,
+			.size =       0x000400000,
 		},
 
 		.debug_console = {
-			.address = 0x021c0500,
-			.size = 0x100,
+			.address = 0x021c0000,
+			.size = 0x1000,
 			.type = JAILHOUSE_CON_TYPE_8250,
 			.flags = JAILHOUSE_CON_ACCESS_MMIO |
 				JAILHOUSE_CON_REGDIST_1,
@@ -50,7 +50,7 @@ struct {
 			},
 		},
 		.root_cell = {
-			.name = "ls1046a",
+			.name = "nxp-lx2160a",
 
 			.cpu_set_size = sizeof(config.cpus),
 			.num_memory_regions = ARRAY_SIZE(config.mem_regions),
@@ -63,51 +63,31 @@ struct {
 	},
 
 	.mem_regions = {
-		/* RAM 00*/ {
+		/* duart1 */ {
+			.phys_start = 0x021c0000,
+			.virt_start = 0x021c0000,
+			.size = 0x10000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+		/* RAM - 1GB - root cell */ {
 			.phys_start = 0x80000000,
 			.virt_start = 0x80000000,
-			.size = 0x33c00000,
+			.size = 0x40000000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_EXECUTE,
 		},
 		/* Inmate memory */{
-			.phys_start = 0xb3c00000,
-			.virt_start = 0xb3c00000,
-			.size = 0x04000000,
+			.phys_start = 0xc0500000,
+			.virt_start = 0xc0500000,
+			.size = 0x3fb00000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_EXECUTE,
 		},
-		/* RAM 01 */ {
-			.phys_start = 0xb8000000,
-			.virt_start = 0xb8000000,
-			.size = 0x03700000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_EXECUTE,
-		},
-		/* Loader */{
-			.phys_start = 0xbb700000,
-			.virt_start = 0xbb700000,
+		/* IVSHMEM shared memory region for 00:00.0 */ {
+			.phys_start = 0xc0400000,
+			.virt_start = 0xc0400000,
 			.size = 0x100000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_EXECUTE,
-		},
-		/* IVHSMEM shared memory region for 00:00.0 */ {
-			.phys_start = 0xbba00000,
-			.virt_start = 0xbba00000,
-			.size = 0x200000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE ,
-		},
-		/* RAM 02 */ {
-			.phys_start = 0xbbc00000,
-			.virt_start = 0xbbc00000,
-			.size = 0x02400000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_EXECUTE,
-		},
-		/* reserved memory */{
-			.phys_start = 0xbe000000,
-			.virt_start = 0xbe000000,
-			.size = 0x2000000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
 	},
