@@ -1,0 +1,105 @@
+/*
+ * Jailhouse, a Linux-based partitioning hypervisor
+ *
+ * Device tree for Linux inmate on NXP FSL-LS1043a-RDB,
+ * corresponds to configs/arm64/nxp-fsl-ls1043a-linux-demo.c
+ *
+ * Copyright (c) NXP, 2019
+ *
+ * Authors:
+ *  hongbo.wang <hongbo.wang@nxp.com>
+ *
+ * This work is licensed under the terms of the GNU GPL, version 2.  See
+ * the COPYING file in the top-level directory.
+ */
+
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+
+/dts-v1/;
+
+/ {
+	model = "Jailhouse cell on NXP FSL-LS1043a-RDB";
+
+	#address-cells = <2>;
+	#size-cells = <2>;
+
+	interrupt-parent = <&gic>;
+
+	hypervisor {
+		compatible = "jailhouse,cell";
+	};
+
+	cpus {
+		#address-cells = <2>;
+		#size-cells = <0>;
+
+		cpu@2 {
+			compatible = "arm,cortex-a53", "arm,armv8";
+			device_type = "cpu";
+			reg = <0x0 0x2>;
+			enable-method = "psci";
+		};
+
+		cpu@3 {
+			compatible = "arm,cortex-a53", "arm,armv8";
+			device_type = "cpu";
+			reg = <0x0 0x3>;
+			enable-method = "psci";
+		};
+	};
+
+	psci {
+		compatible = "arm,psci-0.2";
+		method = "smc";
+	};
+
+	timer {
+		compatible = "arm,armv8-timer";
+		interrupts = <1 13 0xf08>, /* Physical Secure PPI */
+			     <1 14 0xf08>, /* Physical Non-Secure PPI */
+			     <1 11 0xf08>, /* Virtual PPI */
+			     <1 10 0xf08>; /* Hypervisor PPI */
+	};
+
+	gic: interrupt-controller@1400000 {
+		compatible = "arm,gic-400";
+		reg = <0x0 0x1401000 0 0x1000>, /* GICD */
+		      <0x0 0x1402000 0 0x2000>, /* GICC */
+		      <0x0 0x1404000 0 0x2000>, /* GICH */
+		      <0x0 0x1406000 0 0x2000>; /* GICV */
+		interrupt-controller;
+		#interrupt-cells = <3>;
+	};
+
+	uartclk: clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <100000000>;
+	};
+
+	uart: serial@21c0500 {
+		compatible = "fsl,ns16550", "ns16550a";
+		reg = <0x00 0x21c0500 0x0 0x100>;
+		interrupts = <0 54 0x4>;
+		clocks = <&uartclk>, <&uartclk>;
+		clock-names = "uart_clk", "pclk";
+	};
+
+	pcie1: pcie@3400000 {
+		compatible = "fsl,ls1043a-pcie", "snps,dw-pcie";
+		device_type = "pci";
+		bus-range = <0 0xff>;
+		#address-cells = <3>;
+		#size-cells = <2>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0 0 0 7>;
+		interrupt-map = <0000 0 0 1 &gic 0 110 0x4>,
+				<0000 0 0 2 &gic 0 111 0x4>,
+				<0000 0 0 3 &gic 0 112 0x4>,
+				<0000 0 0 4 &gic 0 113 0x4>;
+		reg = <0x00 0x03400000 0x0 0x00100000   /* controller registers */
+		       0x40 0x00000000 0x0 0x00002000>; /* configuration space */
+		ranges = <0x81000000 0x0 0x00000000 0x40 0x00010000 0x0 0x00010000   /* downstream I/O */
+			  0x82000000 0x0 0x40000000 0x40 0x40000000 0x0 0x40000000>; /* non-prefetchable memory */
+	};
+};
