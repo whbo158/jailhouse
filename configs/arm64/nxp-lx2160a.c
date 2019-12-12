@@ -1,7 +1,7 @@
 /*
  * Jailhouse, a Linux-based partitioning hypervisor
  *
- * Configuration for NXP FSL-LS1043A-RDB board
+ * Configuration for NXP LX2160ARDB board
  *
  * Copyright (c) NXP, 2019
  *

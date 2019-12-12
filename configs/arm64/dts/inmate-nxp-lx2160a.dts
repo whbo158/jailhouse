@@ -1,8 +1,8 @@
 /*
  * Jailhouse, a Linux-based partitioning hypervisor
  *
- * Device tree for Linux inmate on NXP FSL-LS1043a-RDB,
- * corresponds to configs/arm64/nxp-fsl-ls1043a-linux-demo.c
+ * Device tree for Linux inmate on NXP LX2160A-RDB,
+ * corresponds to configs/arm64/nxp-lx2160a-linux-demo.c
  *
  * Copyright (c) NXP, 2019
  *
@@ -18,7 +18,7 @@
 /dts-v1/;
 
 / {
-	model = "Jailhouse cell on NXP FSL-LS1043a-RDB";
+	model = "Jailhouse cell on NXP FSL-LX2160A-RDB";
 
 	#address-cells = <2>;
 	#size-cells = <2>;
@@ -86,7 +86,7 @@
 	};
 
 	pcie1: pcie@3400000 {
-		compatible = "fsl,ls1043a-pcie", "snps,dw-pcie";
+		compatible = "fsl,lx2160a-pcie", "snps,dw-pcie";
 		device_type = "pci";
 		bus-range = <0 0xff>;
 		#address-cells = <3>;
