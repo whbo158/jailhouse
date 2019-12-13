@@ -19,7 +19,7 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[7];
+	struct jailhouse_memory mem_regions[4];
 	struct jailhouse_irqchip irqchips[2];
 } __attribute__((packed)) config = {
 	.header = {
@@ -41,11 +41,11 @@ struct {
 
 		.platform_info = {
 			.arm = {
-				.gic_version = 2,
-				.gicd_base = 0x1410000,
-				.gicc_base = 0x142f000,
-				.gich_base = 0x1440000,
-				.gicv_base = 0x146f000,
+				.gic_version = 3,
+				.gicd_base = 0x06000000,
+				.gicc_base = 0x0c0c0000,
+				.gich_base = 0x0c0d0000,
+				.gicv_base = 0x0c0e0000,
 				.maintenance_irq = 25,
 			},
 		},
@@ -94,14 +94,14 @@ struct {
 
 	.irqchips = {
 		/* GIC */ {
-			.address = 0x1400000,
+			.address = 0x06000000,
 			.pin_base = 32,
 			.pin_bitmap = {
 				0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff,
 			},
 		},
 		/* GIC */ {
-			.address = 0x1400000,
+			.address = 0x06000000,
 			.pin_base = 160,
 			.pin_bitmap = {
 				0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff,
