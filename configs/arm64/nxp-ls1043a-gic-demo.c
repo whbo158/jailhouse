@@ -1,7 +1,7 @@
 /*
  * Jailhouse, a Linux-based partitioning hypervisor
  *
- * GIC-demo for NXP FSL-LS1043A-RDB board
+ * GIC-demo for NXP LS1043A-RDB board
  *
  * Copyright (c) NXP, 2019
  *
@@ -15,8 +15,6 @@
 
 #include <jailhouse/types.h>
 #include <jailhouse/cell-config.h>
-
-#define ARRAY_SIZE(a) sizeof(a) / sizeof(a[0])
 
 struct {
 	struct jailhouse_cell_desc cell;
@@ -43,7 +41,7 @@ struct {
 	},
 
 	.cpus = {
-		0x8,
+		0x2,
 	},
 
 	.mem_regions = {
