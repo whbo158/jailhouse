@@ -207,6 +207,7 @@ static void init_late(void)
  */
 int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 {
+	int i = 0;
 	static volatile bool activate;
 	bool master = false;
 
@@ -235,15 +236,17 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 		master = true;
 		init_early(cpu_id);
 	}
-	printk("WHB ENTRY!!!\n");
+	printk("WHB ENTRY!!! cpuid:%d error:%d\n", cpu_id, error);
 	if (!error)
 		cpu_init(cpu_data);
 
 	spin_unlock(&init_lock);
 
+	printk("WHB ENTRY!!! 22 cpuid:%d error:%d\n", cpu_id, error);
 	while (!error && initialized_cpus < hypervisor_header.online_cpus)
 		cpu_relax();
 
+	printk("WHB ENTRY!!! 33 cpuid:%d error:%d\n", cpu_id, error);
 	if (!error && master) {
 		init_late();
 		if (!error) {
@@ -259,6 +262,10 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 			cpu_relax();
 	}
 
+	printk("WHB ENTRY!!! 44 cpuid:%d error:%d\n", cpu_id, error);
+	for (i = 0; i < 100; i++)
+	      printk("WHB ENTRY!!! 66 i:%d cpuid:%d error:%d\n", i, cpu_id, error);
+
 	if (error) {
 		if (master)
 			shutdown();
@@ -266,6 +273,7 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 		return error;
 	}
 
+	printk("WHB ENTRY!!! 55 cpuid:%d error:%d\n", cpu_id, error);
 	if (master)
 		printk("Activating hypervisor\n");
 
