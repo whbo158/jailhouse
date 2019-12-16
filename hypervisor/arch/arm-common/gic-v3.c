@@ -119,16 +119,18 @@ static int gicv3_init(void)
 {
 	unsigned long redist_size = GIC_V3_REDIST_SIZE;
 	unsigned int gicr_size;
-
+printk("WHB gicv3_init 0\n");
 	/* Probe the GICD version */
 	gic_version = GICD_PIDR2_ARCH(mmio_read32(gicd_base + GICDv3_PIDR2));
 	if (gic_version != 3 && gic_version != 4)
 		return trace_error(-ENODEV);
 
+printk("WHB gicv3_init 1\n");
 	/* TODO: need to validate more? */
 	if (!(mmio_read32(gicd_base + GICD_CTLR) & GICD_CTLR_ARE_NS))
 		return trace_error(-EIO);
 
+printk("WHB gicv3_init 2\n");
 	last_gicr = system_config->root_cell.cpu_set_size * 8 - 1;
 	while (!cpu_id_valid(last_gicr))
 		last_gicr--;
@@ -146,6 +148,7 @@ static int gicv3_init(void)
 	if (!gicr_base)
 		return -ENOMEM;
 
+printk("WHB gicv3_init 3\n");
 	return 0;
 }
 

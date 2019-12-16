@@ -49,12 +49,14 @@ int arch_cpu_init(struct per_cpu *cpu_data)
 				| HCR_TSC_BIT | HCR_TAC_BIT | HCR_RW_BIT;
 	int err;
 
+printk("WHB arch_cpu_init 0\n");
 	/* link to ID-mapping of trampoline page */
 	err = paging_create_hvpt_link(&cpu_data->pg_structs,
 				      paging_hvirt2phys(&__trampoline_start));
 	if (err)
 		return err;
 
+printk("WHB arch_cpu_init 1\n");
 	/* switch to the permanent page tables */
 	enable_mmu_el2(paging_hvirt2phys(cpu_data->pg_structs.root_table));
 
@@ -65,6 +67,7 @@ int arch_cpu_init(struct per_cpu *cpu_data)
 	if (err)
 		return err;
 
+printk("WHB arch_cpu_init 2\n");
 	/* Conditionally switch to hardened vectors */
 	if (this_cpu_data()->smccc_has_workaround_1)
 		arm_write_sysreg(vbar_el2, &hyp_vectors_hardened);
@@ -75,7 +78,7 @@ int arch_cpu_init(struct per_cpu *cpu_data)
 void __attribute__((noreturn)) arch_cpu_activate_vmm(void)
 {
 	unsigned int cpu_id = this_cpu_id();
-
+printk("WHB arch_cpu_activate_vmm 00\n");
 	/*
 	 * Switch the stack to the private mapping before deactivating the
 	 * common one.
@@ -84,13 +87,17 @@ void __attribute__((noreturn)) arch_cpu_activate_vmm(void)
 		"add sp, sp, %0"
 		: : "g" (LOCAL_CPU_BASE - (unsigned long)per_cpu(cpu_id)));
 
+printk("WHB arch_cpu_activate_vmm 11\n");
 	/* Revoke full per_cpu access now that everything is set up. */
 	paging_map_all_per_cpu(cpu_id, false);
 
+printk("WHB arch_cpu_activate_vmm 22\n");
 	/* return to the caller in Linux */
 	arm_write_sysreg(ELR_EL2, this_cpu_data()->guest_regs.usr[30]);
 
+printk("WHB arch_cpu_activate_vmm 33\n");
 	vmreturn(&this_cpu_data()->guest_regs);
+printk("WHB arch_cpu_activate_vmm 44\n");
 }
 
 /* disable the hypervisor on the current CPU */

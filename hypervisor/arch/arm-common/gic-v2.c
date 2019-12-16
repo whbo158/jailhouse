@@ -48,20 +48,24 @@ static bool gicv2_targets_in_cell(struct cell *cell, u8 targets)
 
 static int gicv2_init(void)
 {
+printk("WHB gicv2_init 0 %p\n", gicd_base);
 	/* Probe the GICD version */
 	if (GICD_PIDR2_ARCH(mmio_read32(gicd_base + GICDv2_PIDR2)) != 2)
 		return trace_error(-ENODEV);
 
+printk("WHB gicv2_init 1 %llx\n", system_config->platform_info.arm.gicc_base);
 	gicc_base = paging_map_device(
 			system_config->platform_info.arm.gicc_base, GICC_SIZE);
 	if (!gicc_base)
 		return -ENOMEM;
 
+printk("WHB gicv2_init 2 %llx\n", system_config->platform_info.arm.gich_base);
 	gich_base = paging_map_device(
 			system_config->platform_info.arm.gich_base, GICH_SIZE);
 	if (!gich_base)
 		return -ENOMEM;
 
+printk("WHB gicv2_init 3\n");
 	return 0;
 }
 

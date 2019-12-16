@@ -103,9 +103,10 @@ static void cpu_init(struct per_cpu *cpu_data)
 
 	printk(" CPU %d... ", cpu_data->public.cpu_id);
 
+printk("WHB cpu_init 0\n");
 	if (!cpu_id_valid(cpu_data->public.cpu_id))
 		goto failed;
-
+printk("WHB cpu_init 1\n");
 	cpu_data->public.cell = &root_cell;
 
 	/* set up per-CPU page table */
@@ -118,6 +119,7 @@ static void cpu_init(struct per_cpu *cpu_data)
 	if (err)
 		goto failed;
 
+printk("WHB cpu_init 2\n");
 	if (CON_IS_MMIO(system_config->debug_console.flags)) {
 		err = paging_create_hvpt_link(&cpu_data->pg_structs,
 			(unsigned long)hypervisor_header.debug_console_base);
@@ -125,6 +127,7 @@ static void cpu_init(struct per_cpu *cpu_data)
 			goto failed;
 	}
 
+printk("WHB cpu_init 3\n");
 	/* set up private mapping of per-CPU data structure */
 	err = paging_create(&cpu_data->pg_structs, paging_hvirt2phys(cpu_data),
 			    sizeof(*cpu_data), LOCAL_CPU_BASE,
@@ -132,10 +135,12 @@ static void cpu_init(struct per_cpu *cpu_data)
 	if (err)
 		goto failed;
 
+printk("WHB cpu_init 4\n");
 	err = arch_cpu_init(cpu_data);
 	if (err)
 		goto failed;
 
+printk("WHB cpu_init 5\n");
 	/* Make sure any remappings to the temporary regions can be performed
 	 * without allocations of page table pages. */
 	err = paging_create(&cpu_data->pg_structs, 0,
@@ -145,6 +150,7 @@ static void cpu_init(struct per_cpu *cpu_data)
 	if (err)
 		goto failed;
 
+printk("WHB cpu_init 6\n");
 	printk("OK\n");
 
 	/*
@@ -229,7 +235,7 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 		master = true;
 		init_early(cpu_id);
 	}
-
+	printk("WHB ENTRY!!!\n");
 	if (!error)
 		cpu_init(cpu_data);
 

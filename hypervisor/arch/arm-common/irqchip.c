@@ -311,6 +311,8 @@ int irqchip_cpu_init(struct per_cpu *cpu_data)
 {
 	int err;
 
+printk("WHB irqchip_cpu_init irq00:%d \n", irqchip_is_init);
+printk("WHB irqchip_cpu_init irq11:%d \n", system_config->platform_info.arm.gic_version);
 	/* Only execute once, on master CPU */
 	if (!irqchip_is_init) {
 		switch (system_config->platform_info.arm.gic_version) {
@@ -324,19 +326,21 @@ int irqchip_cpu_init(struct per_cpu *cpu_data)
 			return trace_error(-EINVAL);
 		}
 
+printk("WHB irqchip_cpu_init irq22:%llx \n", system_config->platform_info.arm.gicd_base);
 		gicd_base = paging_map_device(
 				system_config->platform_info.arm.gicd_base,
 				irqchip.gicd_size);
 		if (!gicd_base)
 			return -ENOMEM;
 
+printk("WHB irqchip_cpu_init irq33:%d \n", irqchip_is_init);
 		err = irqchip.init();
 		if (err)
 			return err;
 
+printk("WHB irqchip_cpu_init irq44:%d \n", irqchip_is_init);
 		irqchip_is_init = true;
 	}
-
 	return irqchip.cpu_init(cpu_data);
 }
 
