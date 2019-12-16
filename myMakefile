@@ -18,7 +18,9 @@ myapp:
 
 cpb:
 	cp ./inmates/demos/arm64/gic-demo.bin ./whb/
+	cp ./inmates/demos/arm64/uart-demo.bin ./whb/
 	cp ./tools/jailhouse ./whb/
+	cp ./driver/jailhouse.ko ./whb/
 	cp ./configs/arm64/nxp-ls1043a.cell ./whb/
 	cp ./configs/arm64/nxp-ls1043a-gic-demo.cell ./whb/
 	tar -cvzf whb.tgz ./whb/
