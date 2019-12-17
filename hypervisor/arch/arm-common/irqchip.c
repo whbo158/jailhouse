@@ -341,6 +341,7 @@ printk("WHB irqchip_cpu_init irq33:%d \n", irqchip_is_init);
 printk("WHB irqchip_cpu_init irq44:%d \n", irqchip_is_init);
 		irqchip_is_init = true;
 	}
+
 	return irqchip.cpu_init(cpu_data);
 }
 

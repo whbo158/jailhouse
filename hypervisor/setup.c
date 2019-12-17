@@ -207,7 +207,6 @@ static void init_late(void)
  */
 int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 {
-	int i = 0;
 	static volatile bool activate;
 	bool master = false;
 
@@ -264,8 +263,6 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 	}
 
 	printk("WHB ENTRY!!! 44 cpuid:%d error:%d\n", cpu_id, error);
-	for (i = 0; i < 10; i++)
-	      printk("WHB ENTRY!!! 66 i:%d cpuid:%d error:%d\n", i, cpu_id, error);
 
 	if (error) {
 		if (master)
@@ -280,14 +277,6 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 
 	/* point of no return */
 	arch_cpu_activate_vmm();
-#if 0
-	if (!error) {
-		if (master)
-		      shutdown();
-		arch_cpu_restore(cpu_id, error);
-	}
-#endif
-	return error;
 }
 
 /** Hypervisor description header. */

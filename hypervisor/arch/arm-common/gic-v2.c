@@ -49,9 +49,7 @@ static bool gicv2_targets_in_cell(struct cell *cell, u8 targets)
 static int gicv2_init(void)
 {
 	/* Probe the GICD version */
-	int regval = mmio_read32(gicd_base + GICDv2_PIDR2);
-printk("WHB gicv2_init 0 %p reg:%x gicver:%d\n", gicd_base, regval, GICD_PIDR2_ARCH(regval));
-	if (GICD_PIDR2_ARCH(regval) != 2)
+	if (GICD_PIDR2_ARCH(mmio_read32(gicd_base + GICDv2_PIDR2)) != 2)
 		return trace_error(-ENODEV);
 
 printk("WHB gicv2_init 1 %llx\n", system_config->platform_info.arm.gicc_base);
