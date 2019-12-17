@@ -19,7 +19,7 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[50];
+	struct jailhouse_memory mem_regions[52];
 	struct jailhouse_irqchip irqchips[2];
 	struct jailhouse_pci_device pci_devices[1];
 } __attribute__((packed)) config = {
@@ -333,21 +333,35 @@ struct {
 		/* pcie0 */ {
 			.phys_start = 0x03400000,
 			.virt_start = 0x03400000,
-			.size = 0x10000,
+			.size = 0x100000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO,
 		},
 		/* pcie1 */ {
 			.phys_start = 0x03500000,
 			.virt_start = 0x03500000,
-			.size = 0x10000,
+			.size = 0x100000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO,
 		},
 		/* pcie2 */ {
 			.phys_start = 0x03600000,
 			.virt_start = 0x03600000,
-			.size = 0x10000,
+			.size = 0x100000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+		/* sata-ecc */ {
+			.phys_start = 0x20140500,
+			.virt_start = 0x20140500,
+			.size = 0x100,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+		/* nor */ {
+			.phys_start = 0x60000000,
+			.virt_start = 0x60000000,
+			.size = 0x8000000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO,
 		},
