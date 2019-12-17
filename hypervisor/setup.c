@@ -237,7 +237,7 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 		init_early(cpu_id);
 	}
 	printk("WHB ENTRY!!! 11 cpuid:%d error:%d\n", cpu_id, error);
-//	goto ret_tag;
+
 	if (!error)
 		cpu_init(cpu_data);
 
@@ -280,13 +280,13 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 
 	/* point of no return */
 	arch_cpu_activate_vmm();
-
+#if 0
 	if (!error) {
 		if (master)
 		      shutdown();
 		arch_cpu_restore(cpu_id, error);
 	}
-ret_tag:
+#endif
 	return error;
 }
 
