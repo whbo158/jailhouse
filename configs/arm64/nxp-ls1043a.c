@@ -42,10 +42,10 @@ struct {
 		.platform_info = {
 			.arm = {
 				.gic_version = 2,
-				.gicd_base = 0x1410000,
-				.gicc_base = 0x142f000,
-				.gich_base = 0x1440000,
-				.gicv_base = 0x146f000,
+				.gicd_base = 0x1401000,
+				.gicc_base = 0x1402000,
+				.gich_base = 0x1404000,
+				.gicv_base = 0x1406000,
 				.maintenance_irq = 25,
 			},
 		},

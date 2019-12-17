@@ -236,7 +236,8 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 		master = true;
 		init_early(cpu_id);
 	}
-	printk("WHB ENTRY!!! cpuid:%d error:%d\n", cpu_id, error);
+	printk("WHB ENTRY!!! 11 cpuid:%d error:%d\n", cpu_id, error);
+//	goto ret_tag;
 	if (!error)
 		cpu_init(cpu_data);
 
@@ -263,7 +264,7 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 	}
 
 	printk("WHB ENTRY!!! 44 cpuid:%d error:%d\n", cpu_id, error);
-	for (i = 0; i < 100; i++)
+	for (i = 0; i < 10; i++)
 	      printk("WHB ENTRY!!! 66 i:%d cpuid:%d error:%d\n", i, cpu_id, error);
 
 	if (error) {
@@ -279,6 +280,14 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 
 	/* point of no return */
 	arch_cpu_activate_vmm();
+
+	if (!error) {
+		if (master)
+		      shutdown();
+		arch_cpu_restore(cpu_id, error);
+	}
+ret_tag:
+	return error;
 }
 
 /** Hypervisor description header. */
