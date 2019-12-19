@@ -27,7 +27,7 @@ extern u8 __text_start[], __page_pool[];
 static const __attribute__((aligned(PAGE_SIZE))) u8 empty_page[PAGE_SIZE];
 
 static DEFINE_SPINLOCK(init_lock);
-unsigned int master_cpu_id = -1;
+static unsigned int master_cpu_id = -1;
 static volatile unsigned int entered_cpus, initialized_cpus;
 static volatile int error;
 
@@ -275,14 +275,13 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 	printk("WHB ENTRY!!! 55 cpuid:%d error:%d\n", cpu_id, error);
 	if (master)
 		printk("Activating hypervisor\n");
-#if 1
+#if 0
 	/* point of no return */
 	arch_cpu_activate_vmmwhb();
-	arch_cpu_restore(cpu_id, error);
+//	arch_cpu_restore(cpu_id, error);
 #else
-	arch_cpu_restore(cpu_id, error);
+	arch_cpu_activate_vmm();
 #endif
-	return 0;
 }
 
 /** Hypervisor description header. */

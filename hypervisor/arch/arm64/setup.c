@@ -78,27 +78,22 @@ printk("WHB arch_cpu_init 2\n");
 void __attribute__((noreturn)) arch_cpu_activate_vmm(void)
 {
 	unsigned int cpu_id = this_cpu_id();
-printk("WHB arch_cpu_activate_vmm 00\n");
+
 	/*
 	 * Switch the stack to the private mapping before deactivating the
 	 * common one.
 	 */
-#if 0
 	asm volatile(
 		"add sp, sp, %0"
 		: : "g" (LOCAL_CPU_BASE - (unsigned long)per_cpu(cpu_id)));
-#endif
-printk("WHB arch_cpu_activate_vmm 11\n");
+
 	/* Revoke full per_cpu access now that everything is set up. */
-//	paging_map_all_per_cpu(cpu_id, false);
+	paging_map_all_per_cpu(cpu_id, false);
 
-printk("WHB arch_cpu_activate_vmm 22\n");
 	/* return to the caller in Linux */
-//	arm_write_sysreg(ELR_EL2, this_cpu_data()->guest_regs.usr[30]);
+	arm_write_sysreg(ELR_EL2, this_cpu_data()->guest_regs.usr[30]);
 
-printk("WHB arch_cpu_activate_vmm 33\n");
-//	vmreturn(&this_cpu_data()->guest_regs);
-printk("WHB arch_cpu_activate_vmm 44\n");
+	vmreturn(&this_cpu_data()->guest_regs);
 }
 
 static unsigned long sregs[32];
@@ -189,6 +184,7 @@ static void write_reg_value(unsigned long *pregs)
 	WRITE_REG(29, false)
 	WRITE_REG(30, false)
 #endif
+//	asm volatile("eret");
 }
 
 extern unsigned int master_cpu_id;
@@ -215,14 +211,17 @@ printk("WHB arch_cpu_activate_vmm 22\n");
 	read_reg_value(sregs);
 
 	/* return to the caller in Linux */
-//	arm_write_sysreg(ELR_EL2, this_cpu_data()->guest_regs.usr[30]);
+	arm_write_sysreg(ELR_EL2, this_cpu_data()->guest_regs.usr[30]);
 	if (1) {
 		for (i = 0; i < NUM_USR_REGS; i++) {
-			printk("c%d-x%d:%lx\n", cpu_id, i, this_cpu_data()->guest_regs.usr[i]);
+			printk("c%d-x%d:%lx-%lx\n", cpu_id, i,
+				this_cpu_data()->guest_regs.usr[i], sregs[i]);
 		}
 	}
 
+	//write_reg_value(this_cpu_data()->guest_regs.usr);
 	write_reg_value(sregs);
+//vmreturn(sregs);
 
 //printk("WHB arch_cpu_activate_vmm 33\n");
 //	vmreturn(&this_cpu_data()->guest_regs);
