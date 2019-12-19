@@ -21,7 +21,6 @@ struct {
 	__u64 cpus[1];
 	struct jailhouse_memory mem_regions[52];
 	struct jailhouse_irqchip irqchips[2];
-	struct jailhouse_pci_device pci_devices[1];
 } __attribute__((packed)) config = {
 	.header = {
 		.signature = JAILHOUSE_SYSTEM_SIGNATURE,
@@ -41,10 +40,6 @@ struct {
 		},
 
 		.platform_info = {
-			.pci_mmconfig_base = 0x13000000,
-			.pci_mmconfig_end_bus = 0,
-			.pci_is_virtual = 1,
-			.pci_domain = -1,
 			.arm = {
 				.gic_version = 2,
 				.gicd_base = 0x1401000,
@@ -60,9 +55,6 @@ struct {
 			.cpu_set_size = sizeof(config.cpus),
 			.num_memory_regions = ARRAY_SIZE(config.mem_regions),
 			.num_irqchips = ARRAY_SIZE(config.irqchips),
-			.num_pci_devices = ARRAY_SIZE(config.pci_devices),
-
-			.vpci_irq_base = 102-32,
 		},
 	},
 
@@ -450,18 +442,4 @@ struct {
 			},
 		},
         },
-
-	.pci_devices = {
-		/* 0000:00:00.0 */ {
-			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
-			.domain = 1,
-			.bdf = 0 << 3,
-			.bar_mask = {
-				0xffffff00, 0xffffffff, 0x00000000,
-				0x00000000, 0x00000000, 0x00000000,
-			},
-			.shmem_region = ARRAY_SIZE(config.mem_regions) - 1,
-			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_VETH,
-		},
-	},
 };

@@ -83,20 +83,96 @@ printk("WHB arch_cpu_activate_vmm 00\n");
 	 * Switch the stack to the private mapping before deactivating the
 	 * common one.
 	 */
+#if 0
 	asm volatile(
 		"add sp, sp, %0"
 		: : "g" (LOCAL_CPU_BASE - (unsigned long)per_cpu(cpu_id)));
-
+#endif
 printk("WHB arch_cpu_activate_vmm 11\n");
 	/* Revoke full per_cpu access now that everything is set up. */
-	paging_map_all_per_cpu(cpu_id, false);
+//	paging_map_all_per_cpu(cpu_id, false);
 
 printk("WHB arch_cpu_activate_vmm 22\n");
 	/* return to the caller in Linux */
-	arm_write_sysreg(ELR_EL2, this_cpu_data()->guest_regs.usr[30]);
+//	arm_write_sysreg(ELR_EL2, this_cpu_data()->guest_regs.usr[30]);
 
 printk("WHB arch_cpu_activate_vmm 33\n");
-	vmreturn(&this_cpu_data()->guest_regs);
+//	vmreturn(&this_cpu_data()->guest_regs);
+printk("WHB arch_cpu_activate_vmm 44\n");
+}
+
+#define READ_REG(r, f) if (f || (pregs[r] == 0)) {asm volatile("str x"#r", %0" : "=m" (pregs[r]));}
+static void copy_reg_value(unsigned long *pregs)
+{
+	READ_REG(0, true)
+	READ_REG(1, true)
+	READ_REG(2, true)
+	READ_REG(3, true)
+	READ_REG(4, true)
+	READ_REG(5, true)
+	READ_REG(6, true)
+	READ_REG(7, true)
+	READ_REG(8, true)
+	READ_REG(9, true)
+	READ_REG(10, true)
+	READ_REG(11, true)
+	READ_REG(12, true)
+	READ_REG(13, true)
+	READ_REG(14, true)
+	READ_REG(15, true)
+	READ_REG(16, true)
+	READ_REG(17, true)
+	READ_REG(18, true)
+	READ_REG(19, false)
+
+#if 1
+	READ_REG(20, false)
+	READ_REG(21, false)
+	READ_REG(22, false)
+	READ_REG(23, false)
+	READ_REG(24, false)
+	READ_REG(25, false)
+	READ_REG(26, false)
+	READ_REG(27, false)
+	READ_REG(28, false)
+	READ_REG(29, false)
+	READ_REG(30, false)
+#endif
+}
+
+extern unsigned int master_cpu_id;
+void  arch_cpu_activate_vmmwhb(void)
+{
+	int i = 0;
+	unsigned int cpu_id = this_cpu_id();
+printk("WHB arch_cpu_activate_vmm 00\n");
+	/*
+	 * Switch the stack to the private mapping before deactivating the
+	 * common one.
+	 */
+#if 1
+	asm volatile(
+		"add sp, sp, %0"
+		: : "g" (LOCAL_CPU_BASE - (unsigned long)per_cpu(cpu_id)));
+#endif
+printk("WHB arch_cpu_activate_vmm 11\n");
+	/* Revoke full per_cpu access now that everything is set up. */
+//	paging_map_all_per_cpu(cpu_id, false);
+
+printk("WHB arch_cpu_activate_vmm 22\n");
+
+	copy_reg_value(this_cpu_data()->guest_regs.usr);
+
+	/* return to the caller in Linux */
+	arm_write_sysreg(ELR_EL2, this_cpu_data()->guest_regs.usr[30]);
+	if (1) {
+		for (i = 0; i < NUM_USR_REGS; i++) {
+			printk("c%d-x%d:%lx\n", cpu_id, i, this_cpu_data()->guest_regs.usr[i]);
+		}
+	}
+
+printk("WHB arch_cpu_activate_vmm 33\n");
+//	vmreturn(&this_cpu_data()->guest_regs);
 printk("WHB arch_cpu_activate_vmm 44\n");
 }
 

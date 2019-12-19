@@ -848,6 +848,7 @@ static int pci_init(void)
 	mmcfg_start = system_config->platform_info.pci_mmconfig_base;
 	end_bus = system_config->platform_info.pci_mmconfig_end_bus;
 	mmcfg_size = (end_bus + 1) * 256 * 4096;
+	printk("WHB pci_init mmcfg:%x\n", mmcfg_start);
 
 	if (mmcfg_start != 0 && !system_config->platform_info.pci_is_virtual) {
 		pci_space = paging_map_device(mmcfg_start, mmcfg_size);

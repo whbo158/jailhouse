@@ -27,7 +27,7 @@ extern u8 __text_start[], __page_pool[];
 static const __attribute__((aligned(PAGE_SIZE))) u8 empty_page[PAGE_SIZE];
 
 static DEFINE_SPINLOCK(init_lock);
-static unsigned int master_cpu_id = -1;
+unsigned int master_cpu_id = -1;
 static volatile unsigned int entered_cpus, initialized_cpus;
 static volatile int error;
 
@@ -205,6 +205,7 @@ static void init_late(void)
  * This is the architecture independent C entry point, which is called by
  * arch_entry. This routine is called on each CPU when initializing Jailhouse.
  */
+extern void  arch_cpu_activate_vmmwhb(void);
 int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 {
 	static volatile bool activate;
@@ -274,9 +275,14 @@ int entry(unsigned int cpu_id, struct per_cpu *cpu_data)
 	printk("WHB ENTRY!!! 55 cpuid:%d error:%d\n", cpu_id, error);
 	if (master)
 		printk("Activating hypervisor\n");
-
+#if 1
 	/* point of no return */
-	arch_cpu_activate_vmm();
+	arch_cpu_activate_vmmwhb();
+	arch_cpu_restore(cpu_id, error);
+#else
+	arch_cpu_restore(cpu_id, error);
+#endif
+	return 0;
 }
 
 /** Hypervisor description header. */
