@@ -101,8 +101,21 @@ printk("WHB arch_cpu_activate_vmm 33\n");
 printk("WHB arch_cpu_activate_vmm 44\n");
 }
 
-#define READ_REG(r, f) if (f || (pregs[r] == 0)) {asm volatile("str x"#r", %0" : "=m" (pregs[r]));}
-static void copy_reg_value(unsigned long *pregs)
+static unsigned long sregs[32];
+
+#define READ_REG(r, f) do {\
+	if (true || (pregs[r] == 0)) {\
+		asm volatile("str x"#r", %0" : "=m" (pregs[r]));\
+	}\
+}while(0);
+
+#define WRITE_REG(r, f) do {\
+	if (true || (pregs[r] == 0)) {\
+		asm volatile("ldr x"#r", %0" : : "m" (pregs[r]));\
+	}\
+}while(0);
+
+static void read_reg_value(unsigned long *pregs)
 {
 	READ_REG(0, true)
 	READ_REG(1, true)
@@ -125,11 +138,11 @@ static void copy_reg_value(unsigned long *pregs)
 	READ_REG(18, true)
 	READ_REG(19, false)
 
+	READ_REG(20, true)
+	READ_REG(21, true)
+	READ_REG(22, true)
+	READ_REG(23, true)
 #if 1
-	READ_REG(20, false)
-	READ_REG(21, false)
-	READ_REG(22, false)
-	READ_REG(23, false)
 	READ_REG(24, false)
 	READ_REG(25, false)
 	READ_REG(26, false)
@@ -137,6 +150,44 @@ static void copy_reg_value(unsigned long *pregs)
 	READ_REG(28, false)
 	READ_REG(29, false)
 	READ_REG(30, false)
+#endif
+}
+
+static void write_reg_value(unsigned long *pregs)
+{
+	WRITE_REG(0, true)
+	WRITE_REG(1, true)
+	WRITE_REG(2, true)
+	WRITE_REG(3, true)
+	WRITE_REG(4, true)
+	WRITE_REG(5, true)
+	WRITE_REG(6, true)
+	WRITE_REG(7, true)
+	WRITE_REG(8, true)
+	WRITE_REG(9, true)
+	WRITE_REG(10, true)
+	WRITE_REG(11, true)
+	WRITE_REG(12, true)
+	WRITE_REG(13, true)
+	WRITE_REG(14, true)
+	WRITE_REG(15, true)
+	WRITE_REG(16, true)
+	WRITE_REG(17, true)
+	WRITE_REG(18, true)
+	WRITE_REG(19, false)
+
+	WRITE_REG(20, true)
+	WRITE_REG(21, true)
+	WRITE_REG(22, true)
+	WRITE_REG(23, true)
+#if 1
+	WRITE_REG(24, false)
+	WRITE_REG(25, false)
+	WRITE_REG(26, false)
+	WRITE_REG(27, false)
+	WRITE_REG(28, false)
+	WRITE_REG(29, false)
+	WRITE_REG(30, false)
 #endif
 }
 
@@ -161,17 +212,19 @@ printk("WHB arch_cpu_activate_vmm 11\n");
 
 printk("WHB arch_cpu_activate_vmm 22\n");
 
-	copy_reg_value(this_cpu_data()->guest_regs.usr);
+	read_reg_value(sregs);
 
 	/* return to the caller in Linux */
-	arm_write_sysreg(ELR_EL2, this_cpu_data()->guest_regs.usr[30]);
+//	arm_write_sysreg(ELR_EL2, this_cpu_data()->guest_regs.usr[30]);
 	if (1) {
 		for (i = 0; i < NUM_USR_REGS; i++) {
 			printk("c%d-x%d:%lx\n", cpu_id, i, this_cpu_data()->guest_regs.usr[i]);
 		}
 	}
 
-printk("WHB arch_cpu_activate_vmm 33\n");
+	write_reg_value(sregs);
+
+//printk("WHB arch_cpu_activate_vmm 33\n");
 //	vmreturn(&this_cpu_data()->guest_regs);
 printk("WHB arch_cpu_activate_vmm 44\n");
 }
