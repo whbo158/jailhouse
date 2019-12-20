@@ -1,7 +1,8 @@
 CC_PATH = /usr/bin/
 MK_PATH = /usr/bin/
 MK_PATH_BIN = /opt/fsl-qoriq/2.6/sysroots/x86_64-fslsdk-linux/usr/bin/
-KERNEL_PATH=/mnt/vda3/software/storage/jailhouse/openil/openil/output/build/linux-LSDK-19.09-V4.19/
+#KERNEL_PATH=/mnt/vda3/software/storage/jailhouse/openil/openil/output/build/linux-LSDK-19.09-V4.19/
+KERNEL_PATH=/mnt/vda3/software/lsdk_flexbuilder/flexbuild_lsdk1909/flexbuild_lsdk1909_update_221019/build/linux/linux/arm64/LS/output/LSDK-19.09-V4.19/
 
 MYINSTALL_MOD_PATH = ./install/mod
 MYINSTALL_HDR_PATH = ./install/hdr
@@ -23,6 +24,7 @@ cpb:
 	cp ./driver/jailhouse.ko ./whb/
 	cp ./configs/arm64/nxp-ls1043a.cell ./whb/
 	cp ./configs/arm64/nxp-ls1043a-gic-demo.cell ./whb/
+	cp ./configs/arm64/nxp-ls1043a-uart-demo.cell ./whb/
 	tar -cvzf whb.tgz ./whb/
 	sudo cp whb.tgz /var/www/html/image/
 

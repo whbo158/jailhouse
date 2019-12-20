@@ -459,6 +459,7 @@ static int jailhouse_cmd_enable(struct jailhouse_system __user *arg)
 	/* Map physical memory region reserved for Jailhouse. */
 	hypervisor_mem = jailhouse_ioremap(hv_mem->phys_start, remap_addr,
 					   hv_mem->size);
+	pr_notice("whb BASE_ADDR: %p-%lx\n", hypervisor_mem, JAILHOUSE_BASE);
 	if (!hypervisor_mem) {
 		pr_err("jailhouse: Unable to map RAM reserved for hypervisor "
 		       "at %08lx\n", (unsigned long)hv_mem->phys_start);
