@@ -1,5 +1,5 @@
 /*
- * NXP ls1043a RDB target - linux-demo
+ * ls1043a RDB target - linux-demo
  *
  * Copyright 2020 NXP
  *
@@ -25,10 +25,9 @@ struct {
 		.revision = JAILHOUSE_CONFIG_REVISION,
 		.flags = JAILHOUSE_SYS_VIRTUAL_DEBUG_CONSOLE,
 		.hypervisor_memory = {
-			.phys_start = 0xf2a00000,
+			.phys_start = 0xfba00000,
 			.size =       0x00400000,
 		},
-
 		.debug_console = {
 			.address = 0x21c0500, /* Uart0 in DUART1 */
 			.size = 0x100,
@@ -36,9 +35,8 @@ struct {
 			.flags = JAILHOUSE_CON_ACCESS_MMIO |
 				 JAILHOUSE_CON_REGDIST_1,
 		},
-
 		.platform_info = {
-			.pci_mmconfig_base = 0xf2500000,
+			.pci_mmconfig_base = 0xfb500000,
 			.pci_mmconfig_end_bus = 0,
 			.pci_is_virtual = 1,
 			.pci_domain = -1,
@@ -53,7 +51,7 @@ struct {
 			},
 		},
 		.root_cell = {
-			.name = "NXP-LS1043A-RDB",
+			.name = "ls1043a",
 			.num_pci_devices = ARRAY_SIZE(config.pci_devices),
 			.cpu_set_size = sizeof(config.cpus),
 			.num_memory_regions = ARRAY_SIZE(config.mem_regions),
@@ -68,37 +66,37 @@ struct {
 
 	.mem_regions = {
 		/* IVSHMEM shared memory region for 00:00.0 */ {
-			.phys_start = 0xf2700000,
-			.virt_start = 0xf2700000,
+			.phys_start = 0xfb700000,
+			.virt_start = 0xfb700000,
 			.size = 0x1000,
 			.flags = JAILHOUSE_MEM_READ,
 		},
 		{
-			.phys_start = 0xf2701000,
-			.virt_start = 0xf2701000,
+			.phys_start = 0xfb701000,
+			.virt_start = 0xfb701000,
 			.size = 0x9000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
 		{
-			.phys_start = 0xf270a000,
-			.virt_start = 0xf270a000,
+			.phys_start = 0xfb70a000,
+			.virt_start = 0xfb70a000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
 		},
 		{
-			.phys_start = 0xf270c000,
-			.virt_start = 0xf270c000,
+			.phys_start = 0xfb70c000,
+			.virt_start = 0xfb70c000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ,
 		},
 		{
-			.phys_start = 0xf270e000,
-			.virt_start = 0xf270e000,
+			.phys_start = 0xfb70e000,
+			.virt_start = 0xfb70e000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ,
 		},
 		/* IVSHMEM shared memory regions for 00:01.0 (networking) */
-		JAILHOUSE_SHMEM_NET_REGIONS(0xf2800000, 0),
+		JAILHOUSE_SHMEM_NET_REGIONS(0xfb800000, 0),
 		/* RAM - 1GB at DRAM1 region - root cell */ {
 			.phys_start = 0x80000000,
 			.virt_start = 0x80000000,
@@ -114,15 +112,15 @@ struct {
 				JAILHOUSE_MEM_EXECUTE,
 		},
 		/* RAM: Inmate */ {
-			.phys_start = 0xc0100000,
-			.virt_start = 0xc0100000,
-			.size = 0x32400000,
+			.phys_start = 0xc0000000,
+			.virt_start = 0xc0000000,
+			.size = 0x3b500000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_EXECUTE,
 		},
 		/* RAM: loader */ {
-			.phys_start = 0xc0000000,
-			.virt_start = 0xc0000000,
+			.phys_start = 0xfb900000,
+			.virt_start = 0xfb900000,
 			.size = 0x00100000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_EXECUTE,

@@ -34,6 +34,7 @@ struct {
 
 		.console = {
 			.address = 0x21c0600,	/* Uart1 in DUART1 */
+			.divider = 0xd9, /* baudrate: 115200 */
 			.type = JAILHOUSE_CON_TYPE_8250,
 			.flags = JAILHOUSE_CON_ACCESS_MMIO |
 				JAILHOUSE_CON_REGDIST_1,
@@ -46,34 +47,34 @@ struct {
 
 	.mem_regions = {
 		/* IVSHMEM shared memory region for 00:00.0 */ {
-			.phys_start = 0xf2700000,
-			.virt_start = 0xf2700000,
+			.phys_start = 0xfb700000,
+			.virt_start = 0xfb700000,
 			.size = 0x1000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xf2701000,
-			.virt_start = 0xf2701000,
+			.phys_start = 0xfb701000,
+			.virt_start = 0xfb701000,
 			.size = 0x9000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xf270a000,
-			.virt_start = 0xf270a000,
+			.phys_start = 0xfb70a000,
+			.virt_start = 0xfb70a000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xf270c000,
-			.virt_start = 0xf270c000,
+			.phys_start = 0xfb70c000,
+			.virt_start = 0xfb70c000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xf270e000,
-			.virt_start = 0xf270e000,
+			.phys_start = 0xfb70e000,
+			.virt_start = 0xfb70e000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
 		},
