@@ -39,39 +39,39 @@ struct {
 
 	.mem_regions = {
 		/* IVSHMEM shared memory region for 00:00.0 */ {
-			.phys_start = 0xfb700000,
-			.virt_start = 0xfb700000,
+			.phys_start = 0xc0500000,
+			.virt_start = 0xc0500000,
 			.size = 0x1000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xfb701000,
-			.virt_start = 0xfb701000,
+			.phys_start = 0xc0501000,
+			.virt_start = 0xc0501000,
 			.size = 0x9000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xfb70a000,
-			.virt_start = 0xfb70a000,
+			.phys_start = 0xc050a000,
+			.virt_start = 0xc050a000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xfb70c000,
-			.virt_start = 0xfb70c000,
+			.phys_start = 0xc050c000,
+			.virt_start = 0xc050c000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xfb70e000,
-			.virt_start = 0xfb70e000,
+			.phys_start = 0xc050e000,
+			.virt_start = 0xc050e000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_ROOTSHARED,
 		},
 		/* IVSHMEM shared memory regions for 00:01.0 (networking) */
-		JAILHOUSE_SHMEM_NET_REGIONS(0xfb800000, 1),
+		JAILHOUSE_SHMEM_NET_REGIONS(0xc0600000, 1),
 		/* DUART1 */ {
 			.phys_start = 0x21c0000,
 			.virt_start = 0x21c0000,
@@ -94,16 +94,16 @@ struct {
 				JAILHOUSE_MEM_IO,
 		},
 		/* RAM */ {
-			.phys_start = 0xfb900000,
+			.phys_start = 0xc0400000,
 			.virt_start = 0,
 			.size = 0x00010000, /* 64K */
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_LOADABLE,
 		},
 		/* RAM: Top at DRAM1 2GB Space */ {
-			.phys_start = 0xc0000000,
-			.virt_start = 0xc0000000,
-			.size = 0x3b500000,
+			.phys_start = 0xc0900000,
+			.virt_start = 0xc0900000,
+			.size = 0x33700000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_DMA |
 				JAILHOUSE_MEM_LOADABLE,
