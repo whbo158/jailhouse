@@ -213,6 +213,7 @@
 			clocks = <&clockgen 3 0>;
 		};
 
+		/* fman3-0 */
 		fman0: fman@1a00000 {
 			#address-cells = <1>;
 			#size-cells = <1>;
@@ -332,6 +333,7 @@
 				reg = <0xfd000 0x1000>;
 			};
 
+			/* fman3-0-1g-0 */
 			fman0_rx_0x08: port@88000 {
 				cell-index = <0x8>;
 				compatible = "fsl,fman-v3-port-rx", "fsl,fman-port-1g-rx";
@@ -365,6 +367,7 @@
 				};
 			};
 
+			/* fman3-0-1g-1 */
 			fman0_rx_0x09: port@89000 {
 				cell-index = <0x9>;
 				compatible = "fsl,fman-v3-port-rx", "fsl,fman-port-1g-rx";
@@ -398,6 +401,7 @@
 				};
 			};
 
+			/* fman3-0-1g-2 */
 			fman0_rx_0x0a: port@8a000 {
 				cell-index = <0xa>;
 				compatible = "fsl,fman-v3-port-rx", "fsl,fman-port-1g-rx";
@@ -431,6 +435,7 @@
 				};
 			};
 
+			/* fman3-0-1g-3 */
 			fman0_rx_0x0b: port@8b000 {
 				cell-index = <0xb>;
 				compatible = "fsl,fman-v3-port-rx", "fsl,fman-port-1g-rx";
@@ -464,6 +469,7 @@
 				};
 			};
 
+			/* fman3-0-1g-4 */
 			fman0_rx_0x0c: port@8c000 {
 				cell-index = <0xc>;
 				compatible = "fsl,fman-v3-port-rx", "fsl,fman-port-1g-rx";
@@ -497,6 +503,7 @@
 				};
 			};
 
+			/* fman3-0-1g-5 */
 			fman0_rx_0x0d: port@8d000 {
 				cell-index = <0xd>;
 				compatible = "fsl,fman-v3-port-rx", "fsl,fman-port-1g-rx";
@@ -530,6 +537,7 @@
 				};
 			};
 
+			/* fman3-0-10g-0 */
 			fman0_rx_0x10: port@90000 {
 				cell-index = <0x10>;
 				compatible = "fsl,fman-v3-port-rx", "fsl,fman-port-10g-rx";
