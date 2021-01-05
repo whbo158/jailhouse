@@ -24,7 +24,7 @@ myapp:
 
 jail:
 	rm -fr ./bin_arm/*
-	sudo make clean
+	#sudo make clean
 	make ARCH=arm64 CROSS_COMPILE=${CC_PATH}aarch64-none-linux-gnu- DESTDIR=bin_arm KDIR=${KERNEL_PATH}
 	make ARCH=arm64 CROSS_COMPILE=${CC_PATH}aarch64-none-linux-gnu- DESTDIR=bin_arm KDIR=${KERNEL_PATH} install
 	@echo "make jailhouse is OK"
