@@ -676,6 +676,34 @@
 		interrupts = <GIC_SPI 190 IRQ_TYPE_LEVEL_HIGH>;
 		cell-index = <9>;
 	};
+
+	qman-fqids@0 {
+		compatible = "fsl,fqid-range";
+		fsl,fqid-range = <256 256>;
+	};
+
+	qman-fqids@1 {
+		compatible = "fsl,fqid-range";
+		fsl,fqid-range = <32768 32768>;
+	};
+
+	qman-pools@0 {
+		compatible = "fsl,pool-channel-range";
+		fsl,pool-channel-range = <0x401 0xf>;
+	};
+
+	qman-cgrids@0 {
+		compatible = "fsl,cgrid-range";
+		fsl,cgrid-range = <0 256>;
+	};
+
+	qman-ceetm@0 {
+		compatible = "fsl,qman-ceetm";
+		fsl,ceetm-lfqid-range = <0xf00000 0x1000>;
+		fsl,ceetm-sp-range = <0 16>;
+		fsl,ceetm-lni-range = <0 8>;
+		fsl,ceetm-channel-range = <0 32>;
+	};
 };
 
 &bportals {
@@ -691,60 +719,75 @@
 		compatible = "fsl,bman-portal";
 		reg = <0x0 0x4000>, <0x4000000 0x4000>;
 		interrupts = <GIC_SPI 173 IRQ_TYPE_LEVEL_HIGH>;
+		cell-index = <0>;
 	};
 
 	bman-portal@10000 {
 		compatible = "fsl,bman-portal";
 		reg = <0x10000 0x4000>, <0x4010000 0x4000>;
 		interrupts = <GIC_SPI 175 IRQ_TYPE_LEVEL_HIGH>;
+		cell-index = <1>;
 	};
 
 	bman-portal@20000 {
 		compatible = "fsl,bman-portal";
 		reg = <0x20000 0x4000>, <0x4020000 0x4000>;
 		interrupts = <GIC_SPI 177 IRQ_TYPE_LEVEL_HIGH>;
+		cell-index = <2>;
 	};
 
 	bman-portal@30000 {
 		compatible = "fsl,bman-portal";
 		reg = <0x30000 0x4000>, <0x4030000 0x4000>;
 		interrupts = <GIC_SPI 179 IRQ_TYPE_LEVEL_HIGH>;
+		cell-index = <3>;
 	};
 
 	bman-portal@40000 {
 		compatible = "fsl,bman-portal";
 		reg = <0x40000 0x4000>, <0x4040000 0x4000>;
 		interrupts = <GIC_SPI 181 IRQ_TYPE_LEVEL_HIGH>;
+		cell-index = <4>;
 	};
 
 	bman-portal@50000 {
 		compatible = "fsl,bman-portal";
 		reg = <0x50000 0x4000>, <0x4050000 0x4000>;
 		interrupts = <GIC_SPI 183 IRQ_TYPE_LEVEL_HIGH>;
+		cell-index = <5>;
 	};
 
 	bman-portal@60000 {
 		compatible = "fsl,bman-portal";
 		reg = <0x60000 0x4000>, <0x4060000 0x4000>;
 		interrupts = <GIC_SPI 185 IRQ_TYPE_LEVEL_HIGH>;
+		cell-index = <6>;
 	};
 
 	bman-portal@70000 {
 		compatible = "fsl,bman-portal";
 		reg = <0x70000 0x4000>, <0x4070000 0x4000>;
 		interrupts = <GIC_SPI 187 IRQ_TYPE_LEVEL_HIGH>;
+		cell-index = <7>;
 	};
 
 	bman-portal@80000 {
 		compatible = "fsl,bman-portal";
 		reg = <0x80000 0x4000>, <0x4080000 0x4000>;
 		interrupts = <GIC_SPI 189 IRQ_TYPE_LEVEL_HIGH>;
+		cell-index = <8>;
 	};
 
 	bman-portal@90000 {
 		compatible = "fsl,bman-portal";
 		reg = <0x90000 0x4000>, <0x4090000 0x4000>;
 		interrupts = <GIC_SPI 191 IRQ_TYPE_LEVEL_HIGH>;
+		cell-index = <9>;
+	};
+
+	bman-bpids@0 {
+		compatible = "fsl,bpid-range";
+		fsl,bpid-range = <32 32>;
 	};
 };
 
@@ -753,59 +796,36 @@
 
 	/* these aliases provide the FMan ports mapping */
 	enet0: ethernet@e0000 {
-	};
-
-	enet1: ethernet@e2000 {
-	};
-
-	enet2: ethernet@e4000 {
-	};
-
-	enet3: ethernet@e6000 {
-	};
-
-	enet4: ethernet@e8000 {
-	};
-
-	enet5: ethernet@ea000 {
-	};
-
-	enet6: ethernet@f0000 {
-	};
-};
-
-&fman0 {
-	ethernet@e0000 {
 		phy-handle = <&qsgmii_phy1>;
 		phy-connection-type = "qsgmii";
 	};
 
-	ethernet@e2000 {
+	enet1: ethernet@e2000 {
 		phy-handle = <&qsgmii_phy2>;
 		phy-connection-type = "qsgmii";
 	};
 
-	ethernet@e4000 {
+	enet2: ethernet@e4000 {
 		phy-handle = <&rgmii_phy1>;
 		phy-connection-type = "rgmii-txid";
 	};
 
-	ethernet@e6000 {
+	enet3: ethernet@e6000 {
 		phy-handle = <&rgmii_phy2>;
 		phy-connection-type = "rgmii-txid";
 	};
 
-	ethernet@e8000 {
+	enet4: ethernet@e8000 {
 		phy-handle = <&qsgmii_phy3>;
 		phy-connection-type = "qsgmii";
 	};
 
-	ethernet@ea000 {
+	enet5: ethernet@ea000 {
 		phy-handle = <&qsgmii_phy4>;
 		phy-connection-type = "qsgmii";
 	};
 
-	ethernet@f0000 { /* 10GEC1 */
+	enet6: ethernet@f0000 { /* 10GEC1 */
 		phy-handle = <&aqr105_phy>;
 		phy-connection-type = "xgmii";
 	};
