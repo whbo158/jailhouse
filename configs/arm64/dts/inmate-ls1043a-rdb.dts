@@ -961,6 +961,8 @@ fman@1a00000 {
 		reg = <0x87000 0x1000>;
 	};
 
+#include "inmate-ls1043a-rdb-fman-ucode.dtsi"
+
 };
 
 };
