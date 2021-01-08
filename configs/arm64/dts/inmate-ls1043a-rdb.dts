@@ -258,44 +258,44 @@
 				reg = <0x80400 0x400>;
 			};
 
-			fman0_oh_0x2: port@82000 {
-				cell-index = <0x2>;
-				compatible = "fsl,fman-v3-port-oh";
+			fman0_oh1: port@82000 {
+				cell-index = <0>;
+				compatible = "fsl,fman-port-oh";
 				reg = <0x82000 0x1000>;
 				fsl,qman-channel-id = <0x809>;
 			};
 
-			fman0_oh_0x3: port@83000 {
-				cell-index = <0x3>;
-				compatible = "fsl,fman-v3-port-oh";
+			fman0_oh2: port@83000 {
+				cell-index = <1>;
+				compatible = "fsl,fman-port-oh";
 				reg = <0x83000 0x1000>;
 				fsl,qman-channel-id = <0x80a>;
 			};
 
-			fman0_oh_0x4: port@84000 {
-				cell-index = <0x4>;
-				compatible = "fsl,fman-v3-port-oh";
+			fman0_oh3: port@84000 {
+				cell-index = <2>;
+				compatible = "fsl,fman-port-oh";
 				reg = <0x84000 0x1000>;
 				fsl,qman-channel-id = <0x80b>;
 			};
 
-			fman0_oh_0x5: port@85000 {
-				cell-index = <0x5>;
-				compatible = "fsl,fman-v3-port-oh";
+			fman0_oh4: port@85000 {
+				cell-index = <3>;
+				compatible = "fsl,fman-port-oh";
 				reg = <0x85000 0x1000>;
 				fsl,qman-channel-id = <0x80c>;
 			};
 
-			fman0_oh_0x6: port@86000 {
-				cell-index = <0x6>;
-				compatible = "fsl,fman-v3-port-oh";
+			fman0_oh5: port@86000 {
+				cell-index = <4>;
+				compatible = "fsl,fman-port-oh";
 				reg = <0x86000 0x1000>;
 				fsl,qman-channel-id = <0x80d>;
 			};
 
-			fman0_oh_0x7: port@87000 {
-				cell-index = <0x7>;
-				compatible = "fsl,fman-v3-port-oh";
+			fman0_oh6: port@87000 {
+				cell-index = <5>;
+				compatible = "fsl,fman-port-oh";
 				reg = <0x87000 0x1000>;
 				fsl,qman-channel-id = <0x80e>;
 			};
@@ -930,46 +930,7 @@
 };
 
 &soc {
-fman@1a00000 {
-
-	fman0_oh1: port@82000 {
-		cell-index = <0>;
-		compatible = "fsl,fman-port-oh";
-		reg = <0x82000 0x1000>;
-	};
-
-	fman0_oh2: port@83000 {
-		cell-index = <1>;
-		compatible = "fsl,fman-port-oh";
-		reg = <0x83000 0x1000>;
-	};
-
-	fman0_oh3: port@84000 {
-		cell-index = <2>;
-		compatible = "fsl,fman-port-oh";
-		reg = <0x84000 0x1000>;
-	};
-
-	fman0_oh4: port@85000 {
-		cell-index = <3>;
-		compatible = "fsl,fman-port-oh";
-		reg = <0x85000 0x1000>;
-	};
-
-	fman0_oh5: port@86000 {
-		cell-index = <4>;
-		compatible = "fsl,fman-port-oh";
-		reg = <0x86000 0x1000>;
-	};
-
-	fman0_oh6: port@87000 {
-		cell-index = <5>;
-		compatible = "fsl,fman-port-oh";
-		reg = <0x87000 0x1000>;
-	};
-
+	fman@1a00000 {
 #include "inmate-ls1043a-rdb-fman-ucode.dtsi"
-
-};
-
+	};
 };
