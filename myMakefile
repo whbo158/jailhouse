@@ -2,10 +2,10 @@
 CC_PATH=/opt/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu/bin/
 MK_PATH = /usr/bin/
 MK_PATH_BIN = /opt/fsl-qoriq/2.6/sysroots/x86_64-fslsdk-linux/usr/bin/
-#KERNEL_PATH=/mnt/vda3/software/storage/industry-linux-2004
+KERNEL_PATH=/mnt/vda3/software/storage/industry-linux-2004
 LSDK_PATH=/mnt/vda2/lsdk/flexbuild_lsdk1909_update_221019
 #KERNEL_PATH=${LSDK_PATH}/build/linux/linux/arm64/LS/output/LSDK-19.09-V4.19/
-KERNEL_PATH=${LSDK_PATH}/build/linux/linux/arm64/LS/output/LSDK-20.04-V5.4-update-290520/
+#KERNEL_PATH=${LSDK_PATH}/build/linux/linux/arm64/LS/output/LSDK-20.04-V5.4-update-290520/
 #LSDK_PATH=/mnt/vda3/software/flexbuilder-lsdk-2012/flexbuild
 #KERNEL_PATH=${LSDK_PATH}/build/linux/kernel/arm64/LS/output/LSDK-20.04-V5.4-update-290520/
 
@@ -24,7 +24,7 @@ myapp:
 
 jail:
 	rm -fr ./bin_arm/*
-	#sudo make clean
+	sudo make clean
 	make ARCH=arm64 CROSS_COMPILE=${CC_PATH}aarch64-none-linux-gnu- DESTDIR=bin_arm KDIR=${KERNEL_PATH}
 	make ARCH=arm64 CROSS_COMPILE=${CC_PATH}aarch64-none-linux-gnu- DESTDIR=bin_arm KDIR=${KERNEL_PATH} install
 	@echo "make jailhouse is OK"
