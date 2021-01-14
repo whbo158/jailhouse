@@ -50,8 +50,8 @@ cpb:
 	cp ${KERNEL_PATH}/arch/arm64/boot/Image.gz ./bin_arm/kernel
 	cp ./Image00.gz ./bin_arm/kernel
 	cp ${KERNEL_PATH}/arch/arm64/boot/dts/freescale/fsl-ls1043a-rdb.dtb ./bin_arm/kernel
-#	sudo cp ${LSDK_PATH}/packages/rfs/initrd/rootfs_yocto_arm64_tiny.cpio.gz ./bin_arm/kernel
-#	sudo cp ${LSDK_PATH}/packages/rfs/initrd/rootfs_buildroot_arm64_tiny.cpio.gz ./bin_arm/kernel
+	sudo cp ./bin_arm_1214/kernel/rootfs_yocto_arm64_tiny.cpio.gz ./bin_arm/kernel
+	sudo cp ./bin_arm_1214/kernel/rootfs_buildroot_arm64_tiny.cpio.gz ./bin_arm/kernel
 	sudo cp ~/small.gz ./bin_arm/kernel
 	tar -cvzf bin_arm.tgz ./bin_arm/
 	#sudo cp bin_arm.tgz /var/www/html/image/
