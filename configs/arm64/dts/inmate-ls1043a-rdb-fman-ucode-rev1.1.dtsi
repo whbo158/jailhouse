@@ -1,3 +1,8 @@
+
+/*
+length:37560 version:1 magic:Q-E-F
+*/
+
 fman_fm0: fman-firmware {
 	name = "fman-firmware";
 	compatible = "fsl,fman-firmware";
