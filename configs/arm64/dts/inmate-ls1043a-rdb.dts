@@ -148,7 +148,6 @@
 		#size-cells = <2>;
 		ranges;
 		dma-ranges = <0x0 0x0 0x0 0x0 0x10000 0x00000000>;
-		/* dma-coherent; */
 
 
 		ddr: memory-controller@1080000 {
