@@ -16,7 +16,7 @@
 struct {
 	struct jailhouse_cell_desc cell;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[24];
+	struct jailhouse_memory mem_regions[23];
 	struct jailhouse_irqchip irqchips[2];
 	struct jailhouse_pci_device pci_devices[2];
 } __attribute__((packed)) config = {
@@ -133,13 +133,6 @@ struct {
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO,
 		},
-		/* esdhc */ {
-			.phys_start = 0x01560000,
-			.virt_start = 0x01560000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
 		/* scfg */ {
 			.phys_start = 0x01570000,
 			.virt_start = 0x01570000,
@@ -184,7 +177,7 @@ struct {
 			.pin_bitmap = {
 				1 << (60 - 32)  | 1 << (61 - 32) |
 					1 << (62 - 32) | 1 << (63 -32), /* vPCI */
-				1 << (44 + 32 - 64) | 1 << (45 + 32 - 64) | 1 << (62 + 32 - 64),
+				1 << (44 + 32 - 64) | 1 << (45 + 32 - 64),
 				0,
 				0,
 			},
