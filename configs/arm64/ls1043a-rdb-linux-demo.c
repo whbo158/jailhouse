@@ -133,13 +133,6 @@ struct {
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO,
 		},
-		/* scfg */ {
-			.phys_start = 0x01570000,
-			.virt_start = 0x01570000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
 		/* dcfg */ {
 			.phys_start = 0x01ee0000,
 			.virt_start = 0x01ee0000,
@@ -186,7 +179,7 @@ struct {
 			.address = 0x1410000,
 			.pin_base = 160,
 			.pin_bitmap = {
-				0,
+				1 << (132 + 32 - 160),  /* 10G PHY */
 				0xfffff000,
 				0,
 				0,
