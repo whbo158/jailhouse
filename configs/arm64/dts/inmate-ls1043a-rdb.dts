@@ -148,7 +148,6 @@
 		#size-cells = <2>;
 		ranges;
 		dma-ranges = <0x0 0x0 0x0 0x0 0x10000 0x00000000>;
-		/* dma-coherent; */
 
 
 		ddr: memory-controller@1080000 {
@@ -159,12 +158,6 @@
 			dma-coherent;
 		};
 
-		scfg: scfg@1570000 {
-			compatible = "fsl,ls1043a-scfg", "syscon";
-			reg = <0x0 0x1570000 0x0 0x10000>;
-			big-endian;
-			dma-coherent;
-		};
 
 		dcfg: dcfg@1ee0000 {
 			compatible = "fsl,ls1043a-dcfg", "syscon";
