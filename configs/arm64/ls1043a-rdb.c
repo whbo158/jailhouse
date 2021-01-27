@@ -43,10 +43,10 @@ struct {
 
 			.arm = {
 				.gic_version = 2,
-				.gicd_base = 0x1410000,
-				.gicc_base = 0x142f000,
-				.gich_base = 0x1440000,
-				.gicv_base = 0x146f000,
+				.gicd_base = 0x1401000,
+				.gicc_base = 0x1402000,
+				.gich_base = 0x1404000,
+				.gicv_base = 0x1406000,
 				.maintenance_irq = 25,
 			},
 		},
@@ -456,14 +456,14 @@ struct {
 
 	.irqchips = {
 		/* GIC */ {
-			.address = 0x1410000,
+			.address = 0x1401000,
 			.pin_base = 32,
 			.pin_bitmap = {
 				0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff
 			},
 		},
 		/* GIC */ {
-			.address = 0x1410000,
+			.address = 0x1401000,
 			.pin_base = 160,
 			.pin_bitmap = {
 				0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff

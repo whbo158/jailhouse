@@ -102,7 +102,7 @@ struct {
 
 	.irqchips = {
 		/* GIC-400 */ {
-			.address = 0x1410000,
+			.address = 0x1401000,
 			.pin_base = 32,
 			.pin_bitmap = {
 				1 << (60 - 32), /* vPCI */
@@ -112,7 +112,7 @@ struct {
 			},
 		},
 		/* GIC-400 */ {
-			.address = 0x1410000,
+			.address = 0x1401000,
 			.pin_base = 160,
 			.pin_bitmap = {
 				0,
