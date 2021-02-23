@@ -57,6 +57,7 @@ cpb:
 	#cp ../siemens_jailhouse_base00/bin_arm/inmate-ls1043a-rdb.dtb ./bin_arm/inmate-ls1043a-rdb00.dtb
 	mkdir -p ./bin_arm/kernel
 	cp ${KERNEL_PATH}/arch/arm64/boot/Image.gz ./bin_arm/kernel
+	cp /mnt/vda3/Image-my.gz ./bin_arm/kernel
 	cp ./Image00.gz ./bin_arm/kernel
 	cp ${KERNEL_PATH}/arch/arm64/boot/dts/freescale/fsl-ls1043a-rdb.dtb ./bin_arm/kernel
 	#sudo cp ${LSDK_PATH}/packages/rfs/initrd/rootfs_yocto_arm64_tiny.cpio.gz ./bin_arm/kernel
