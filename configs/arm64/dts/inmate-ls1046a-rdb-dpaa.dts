@@ -191,7 +191,7 @@
 			interrupts = <GIC_SPI 45 IRQ_TYPE_LEVEL_HIGH>;
 			memory-region = <&qman_fqd &qman_pfdr>;
 			dma-coherent;
-			clock-frequency = <400000000>;
+			clock-frequency = <300000000>;
 		};
 
 		bman: bman@1890000 {
