@@ -53,6 +53,7 @@ cpb:
 	cp ./configs/arm64/ls1046a-rdb-inmate-demo.cell ./bin_arm/
 	cp ./configs/arm64/ls1046a-rdb-linux-demo.cell ./bin_arm/
 	cp ./configs/arm64/dts/inmate-ls1046a-rdb.dtb ./bin_arm/
+	cp ./configs/arm64/dts/inmate-ls1046a-rdb-dpaa.dtb ./bin_arm/
 	#cp ../siemens_jailhouse_base00/bin_arm/inmate-ls1043a-rdb.dtb ./bin_arm/inmate-ls1043a-rdb00.dtb
 	mkdir -p ./bin_arm/kernel
 	cp ${KERNEL_PATH}/arch/arm64/boot/Image.gz ./bin_arm/kernel

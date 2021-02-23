@@ -962,6 +962,6 @@
 
 &soc {
 	fman@1a00000 {
-#include "inmate-ls1043a-rdb-fman-ucode.dtsi"
+#include "inmate-ls1046a-rdb-fman-ucode.dtsi"
 	};
 };
