@@ -883,9 +883,11 @@
 
 	/* these aliases provide the FMan ports mapping */
 	enet0: ethernet@e0000 {
+		status = "disabled";
 	};
 
 	enet1: ethernet@e2000 {
+		status = "disabled";
 	};
 
 	enet2: ethernet@e4000 {
