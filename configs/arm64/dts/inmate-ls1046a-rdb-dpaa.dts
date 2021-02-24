@@ -33,7 +33,7 @@
 		ethernet4 = &enet4;
 		ethernet5 = &enet5;
 		ethernet6 = &enet6;
-
+		ethernet7 = &enet7;
 	};
 
 	cpus {
@@ -583,6 +583,42 @@
 					reg = <0x0>;
 				};
 			};
+
+			/* fman3-0-10g-1 */
+			fman0_rx_0x11: port@91000 {
+				cell-index = <0x11>;
+				compatible = "fsl,fman-v3-port-rx", "fsl,fman-port-10g-rx";
+				reg = <0x91000 0x1000>;
+				fsl,fman-10g-port;
+			};
+
+			fman0_tx_0x31: port@b1000 {
+				cell-index = <0x31>;
+				compatible = "fsl,fman-v3-port-tx", "fsl,fman-port-10g-tx";
+				reg = <0xb1000 0x1000>;
+				fsl,fman-10g-port;
+				fsl,qman-channel-id = <0x801>;
+			};
+
+			ethernet@f2000 {
+				cell-index = <0x9>;
+				compatible = "fsl,fman-memac";
+				reg = <0xf2000 0x1000>;
+				fsl,fman-ports = <&fman0_rx_0x11 &fman0_tx_0x31>;
+				pcsphy-handle = <&pcsphy7>;
+			};
+
+			mdio@f3000 {
+				#address-cells = <1>;
+				#size-cells = <0>;
+				compatible = "fsl,fman-memac-mdio", "fsl,fman-xmdio";
+				reg = <0xf3000 0x1000>;
+
+				pcsphy7: ethernet-phy@0 {
+					reg = <0x0>;
+				};
+			};
+
 		};
 
 		fsldpaa: fsl,dpaa {
@@ -623,6 +659,11 @@
 			ethernet@8 {
 				compatible = "fsl,dpa-ethernet";
 				fsl,fman-mac = <&enet6>;
+				dma-coherent;
+			};
+			ethernet@9 {
+				compatible = "fsl,dpa-ethernet";
+				fsl,fman-mac = <&enet7>;
 				dma-coherent;
 			};
 		};
@@ -875,6 +916,12 @@
 		phy-handle = <&aqr106_phy>;
 		phy-connection-type = "xgmii";
 		local-mac-address = [0e 09 00 01 03 04];
+	};
+
+	enet7: ethernet@f2000 { /* 10GEC2 */
+		fixed-link = <0 1 1000 0 0>;
+		phy-connection-type = "xgmii";
+		local-mac-address = [0e 09 00 01 03 0b];
 	};
 
 	mdio@fc000 {
