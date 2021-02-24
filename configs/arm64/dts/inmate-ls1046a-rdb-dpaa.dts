@@ -879,20 +879,22 @@
 
 	/* these aliases provide the FMan ports mapping */
 	enet0: ethernet@e0000 {
+		status = "disabled";
 	};
 
 	enet1: ethernet@e2000 {
+		status = "disabled";
 	};
 
 	enet2: ethernet@e4000 {
 		phy-handle = <&rgmii_phy1>;
-		phy-connection-type = "rgmii";
+		phy-connection-type = "rgmii-txid";
 		local-mac-address = [0e 09 00 01 03 07];
 	};
 
 	enet3: ethernet@e6000 {
 		phy-handle = <&rgmii_phy2>;
-		phy-connection-type = "rgmii";
+		phy-connection-type = "rgmii-txid";
 		local-mac-address = [0e 09 00 01 03 08];
 	};
 
