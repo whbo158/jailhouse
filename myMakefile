@@ -5,7 +5,8 @@ MK_PATH_BIN = /opt/fsl-qoriq/2.6/sysroots/x86_64-fslsdk-linux/usr/bin/
 
 #KERNEL_PATH=/mnt/vda3/software/storage/industry-linux-2004
 
-LSDK_PATH=/mnt/vda3/software/storage/openil_nxp
+#LSDK_PATH=/mnt/vda3/software/storage/openil_nxp
+LSDK_PATH=../openil_ls1046
 KERNEL_PATH=${LSDK_PATH}/output/build/linux-OpenIL-v1.10-linux-202012/
 
 #LSDK_PATH=/mnt/vda2/lsdk/flexbuild_lsdk1909_update_221019

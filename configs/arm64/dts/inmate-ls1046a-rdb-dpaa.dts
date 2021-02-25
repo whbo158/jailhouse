@@ -177,9 +177,9 @@
 			dma-coherent;
 		};
 
-		duart1: serial@21c0600 {
+		duart1: serial@21c0500 {
 			compatible = "fsl,ns16550", "ns16550a";
-			reg = <0x00 0x21c0600 0x0 0x100>;
+			reg = <0x00 0x21c0500 0x0 0x100>;
 			clocks = <&clockgen 4 1>;
 			status = "okay";
 			dma-coherent;
