@@ -17,7 +17,7 @@
 struct {
 	struct jailhouse_cell_desc cell;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[23];
+	struct jailhouse_memory mem_regions[24];
 	struct jailhouse_irqchip irqchips[2];
 	struct jailhouse_pci_device pci_devices[2];
 } __attribute__((packed)) config = {
@@ -134,6 +134,13 @@ struct {
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO,
 		},
+		/* gpio1 */ {
+			.phys_start = 0x02310000,
+			.virt_start = 0x02310000,
+			.size = 0x10000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
 		/* dcfg */ {
 			.phys_start = 0x01ee0000,
 			.virt_start = 0x01ee0000,
@@ -172,7 +179,7 @@ struct {
 				1 << (60 - 32)  | 1 << (61 - 32) |
 					1 << (62 - 32) | 1 << (63 -32), /* vPCI */
 				1 << (44 + 32 - 64) | 1 << (45 + 32 - 64),
-				0,
+				1 << (67 + 32 - 96),
 				0,
 			},
 		},
