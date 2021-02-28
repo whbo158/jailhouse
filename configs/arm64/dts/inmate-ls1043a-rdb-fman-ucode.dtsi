@@ -1,3 +1,11 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Device Tree for inmate cell on NXP ls1043a RDB platform
+ *
+ * Copyright 2020-2021 NXP
+ *
+ *  hongbo.wang <hongbo.wang@nxp.com>
+ */
 
 /*
 length:32604 version:1 magic:Q-E-F

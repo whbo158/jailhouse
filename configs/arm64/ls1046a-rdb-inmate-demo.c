@@ -1,10 +1,11 @@
 /*
  * ls1046a RDB - inmate demo
  *
- * Copyright NXP 2020
+ * Copyright 2020-2021 NXP
  *
  * Authors:
  *  Jiafei Pan <jiafei.pan@nxp.com>
+ *  Hongbo Wang <hongbo.wang@nxp.com>
  *
  * This work is licensed under the terms of the GNU GPL, version 2.  See
  * the COPYING file in the top-level directory.

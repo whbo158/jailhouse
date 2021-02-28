@@ -1,10 +1,11 @@
 /*
  * ls1046a RDB target - linux-demo
  *
- * Copyright 2020 NXP
+ * Copyright 2020-2021 NXP
  *
  * Authors:
  *  Jiafei Pan <jiafei.pan@nxp.com>
+ *  Hongbo Wang <hongbo.wang@nxp.com>
  *
  * This work is licensed under the terms of the GNU GPL, version 2.  See
  * the COPYING file in the top-level directory.
@@ -16,7 +17,7 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[65];
+	struct jailhouse_memory mem_regions[66];
 	struct jailhouse_irqchip irqchips[2];
 	struct jailhouse_pci_device pci_devices[2];
 } __attribute__((packed)) config = {
