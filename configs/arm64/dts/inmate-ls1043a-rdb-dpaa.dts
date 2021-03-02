@@ -2,7 +2,7 @@
 /*
  * Device Tree for inmate cell on NXP ls1043a RDB platform
  *
- * Copyright 2020 NXP
+ * Copyright 2020-2021 NXP
  *
  *  hongbo.wang <hongbo.wang@nxp.com>
  */
@@ -180,6 +180,16 @@
 			clocks = <&clockgen 4 0>;
 			status = "okay";
 			dma-coherent;
+		};
+
+		gpio1: gpio@2310000 {
+			compatible = "fsl,ls1043a-gpio", "fsl,qoriq-gpio";
+			reg = <0x0 0x2310000 0x0 0x10000>;
+			interrupts = <0 67 0x4>;
+			gpio-controller;
+			#gpio-cells = <2>;
+			interrupt-controller;
+			#interrupt-cells = <2>;
 		};
 
 		qman: qman@1880000 {
