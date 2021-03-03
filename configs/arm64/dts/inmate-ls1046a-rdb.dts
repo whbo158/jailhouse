@@ -2,9 +2,11 @@
 /*
  * Device Tree for inmate cell on NXP ls1046a RDB platform
  *
- * Copyright 2020 NXP
+ * Copyright 2020-2021 NXP
  *
  * Jiafei Pan <jiafei.pan@nxp.com>
+ *  Hongbo Wang <hongbo.wang@nxp.com>
+
  */
 
 /dts-v1/;
@@ -124,11 +126,6 @@
 			big-endian;
 		};
 
-		scfg: scfg@1570000 {
-			compatible = "fsl,ls1046a-scfg", "syscon";
-			reg = <0x0 0x1570000 0x0 0x10000>;
-			big-endian;
-		};
 
 		dcfg: dcfg@1ee0000 {
 			compatible = "fsl,ls1046a-dcfg", "syscon";
@@ -152,7 +149,7 @@
 
 	};
 
-	pci@fb500000 {
+	pci@c0700000 {
 		compatible = "pci-host-ecam-generic";
 		device_type = "pci";
 		bus-range = <0 0>;
@@ -164,7 +161,7 @@
 			<0 0 0 2 &gic GIC_SPI 29 IRQ_TYPE_EDGE_RISING>,
 			<0 0 0 3 &gic GIC_SPI 30 IRQ_TYPE_EDGE_RISING>,
 			<0 0 0 4 &gic GIC_SPI 31 IRQ_TYPE_EDGE_RISING>;
-		reg = <0x0 0xfb500000 0x0 0x100000>;
+		reg = <0x0 0xc0700000 0x0 0x100000>;
 		ranges = <0x02000000 0x00 0x10000000 0x0 0x10000000 0x00 0x10000>;
 	};
 

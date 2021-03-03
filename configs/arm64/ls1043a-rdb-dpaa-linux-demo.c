@@ -1,10 +1,9 @@
 /*
- * ls1046a RDB target - linux-demo
+ * ls1043a RDB target - linux-demo
  *
  * Copyright 2020-2021 NXP
  *
  * Authors:
- *  Jiafei Pan <jiafei.pan@nxp.com>
  *  Hongbo Wang <hongbo.wang@nxp.com>
  *
  * This work is licensed under the terms of the GNU GPL, version 2.  See
@@ -17,7 +16,7 @@
 struct {
 	struct jailhouse_cell_desc cell;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[16];
+	struct jailhouse_memory mem_regions[24];
 	struct jailhouse_irqchip irqchips[2];
 	struct jailhouse_pci_device pci_devices[2];
 } __attribute__((packed)) config = {
@@ -87,6 +86,60 @@ struct {
                         .flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
                                 JAILHOUSE_MEM_IO | JAILHOUSE_MEM_ROOTSHARED,
                 },
+		/* qman */ {
+			.phys_start = 0x01880000,
+			.virt_start = 0x01880000,
+			.size = 0x10000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+                /* bman */ {
+                        .phys_start = 0x01890000,
+                        .virt_start = 0x01890000,
+                        .size = 0x10000,
+                        .flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+                                JAILHOUSE_MEM_IO,
+                },
+		/* fman */ {
+			.phys_start = 0x01a00000,
+			.virt_start = 0x01a00000,
+			.size = 0x100000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+		/* qportals CE */ {
+			.phys_start = 0x500000000,
+			.virt_start = 0x500000000,
+			.size = 0x4000000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		},
+		/* qportals CI */ {
+			.phys_start = 0x504000000,
+			.virt_start = 0x504000000,
+			.size = 0x4000000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+		/* bportals CE */ {
+			.phys_start = 0x508000000,
+			.virt_start = 0x508000000,
+			.size = 0x4000000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
+		},
+		/* bportals CI */ {
+			.phys_start = 0x50c000000,
+			.virt_start = 0x50c000000,
+			.size = 0x4000000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+		/* gpio1 */ {
+			.phys_start = 0x02310000,
+			.virt_start = 0x02310000,
+			.size = 0x10000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
 		/* dcfg */ {
 			.phys_start = 0x01ee0000,
 			.virt_start = 0x01ee0000,
@@ -119,22 +172,22 @@ struct {
 
 	.irqchips = {
 		/* GIC-400 */ {
-			.address = 0x1410000,
+			.address = 0x1401000,
 			.pin_base = 32,
 			.pin_bitmap = {
 				1 << (60 - 32)  | 1 << (61 - 32) |
 					1 << (62 - 32) | 1 << (63 -32), /* vPCI */
-				0,
-				0,
+				1 << (44 + 32 - 64) | 1 << (45 + 32 - 64),
+				1 << (67 + 32 - 96),
 				0,
 			},
 		},
 		/* GIC-400 */ {
-			.address = 0x1410000,
+			.address = 0x1401000,
 			.pin_base = 160,
 			.pin_bitmap = {
-				0,
-				0,
+				1 << (132 + 32 - 160),  /* 10G PHY */
+				0xfffff000,
 				0,
 				0,
 			},

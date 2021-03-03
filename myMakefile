@@ -5,11 +5,11 @@ MK_PATH_BIN = /opt/fsl-qoriq/2.6/sysroots/x86_64-fslsdk-linux/usr/bin/
 
 #KERNEL_PATH=/mnt/vda3/software/storage/industry-linux-2004
 
-#LSDK_PATH=/mnt/vda3/software/storage/openil_nxp
-#KERNEL_PATH=${LSDK_PATH}/output/build/linux-OpenIL-v1.10-linux-202012/
+LSDK_PATH=/mnt/vda3/software/storage/openil_nxp
+KERNEL_PATH=${LSDK_PATH}/output/build/linux-OpenIL-v1.10-linux-202012/
 
-LSDK_PATH=/mnt/vda2/lsdk/flexbuild_lsdk1909_update_221019
-KERNEL_PATH=${LSDK_PATH}/build/linux/linux/arm64/LS/output/LSDK-20.04-V5.4-update-290520/
+#LSDK_PATH=/mnt/vda2/lsdk/flexbuild_lsdk1909_update_221019
+#KERNEL_PATH=${LSDK_PATH}/build/linux/linux/arm64/LS/output/LSDK-20.04-V5.4-update-290520/
 #KERNEL_PATH=${LSDK_PATH}/build/linux/linux/arm64/LS/output/LSDK-19.09-V4.19/
 
 #LSDK_PATH=/mnt/vda3/software/flexbuilder-lsdk-2012/flexbuild
@@ -30,11 +30,14 @@ myapp:
 
 jail:
 	rm -fr ./bin_arm/*
-	sudo make clean
+	#sudo make clean
 	make ARCH=arm64 CROSS_COMPILE=${CC_PATH}aarch64-none-linux-gnu- DESTDIR=bin_arm KDIR=${KERNEL_PATH}
 	make ARCH=arm64 CROSS_COMPILE=${CC_PATH}aarch64-none-linux-gnu- DESTDIR=bin_arm KDIR=${KERNEL_PATH} install
 	@echo "make jailhouse is OK"
 #	sudo git checkout tools/bin_arm/usr/local/libexec/jailhouse/jailhouse-cell-linux
+cpb2:
+	cp configs/arm64/ls1046a-rdb-inmate-demo.cell ./bin_arm/
+	cp ./configs/arm64/dts/inmate-ls1046a-rdb-dpaa.dtb ./bin_arm/
 cpb:
 	cp /mnt/vda3/software/myprogram/host_tool.tar ./bin_arm/
 	cp ./inmates/demos/arm64/gic-demo.bin ./bin_arm/
@@ -48,15 +51,25 @@ cpb:
 	cp ./configs/arm64/ls1043a-rdb.cell ./bin_arm/
 	cp ./configs/arm64/ls1043a-rdb-inmate-demo.cell ./bin_arm/
 	cp ./configs/arm64/ls1043a-rdb-linux-demo.cell ./bin_arm/
+	cp ./configs/arm64/ls1043a-rdb-dpaa-linux-demo.cell ./bin_arm/
 	cp ./configs/arm64/dts/inmate-ls1043a-rdb.dtb ./bin_arm/
-	#cp ../siemens_jailhouse_base00/bin_arm/inmate-ls1043a-rdb.dtb ./bin_arm/inmate-ls1043a-rdb00.dtb
+	cp ./configs/arm64/dts/inmate-ls1043a-rdb-dpaa.dtb ./bin_arm/
+	cp ./configs/arm64/ls1046a-rdb.cell ./bin_arm/
+	cp ./configs/arm64/ls1046a-rdb-inmate-demo.cell ./bin_arm/
+	cp ./configs/arm64/ls1046a-rdb-linux-demo.cell ./bin_arm/
+	cp ./configs/arm64/ls1046a-rdb-dpaa-linux-demo.cell ./bin_arm/
+	cp ./configs/arm64/dts/inmate-ls1046a-rdb.dtb ./bin_arm/
+	cp ./configs/arm64/dts/inmate-ls1046a-rdb-dpaa.dtb ./bin_arm/
+	cp ${KERNEL_PATH}/arch/arm64/boot/Image.gz ./bin_arm/
+	cp ${KERNEL_PATH}/arch/arm64/boot/Image ./bin_arm/
+	sudo cp -fr ./bin_arm_base/scripts ./bin_arm/
+	sudo cp ./bin_arm_base/rootfs.cpio.gz ./bin_arm/
+
 	mkdir -p ./bin_arm/kernel
-	cp ${KERNEL_PATH}/arch/arm64/boot/Image.gz ./bin_arm/kernel
-	cp ./Image00.gz ./bin_arm/kernel
-	cp ${KERNEL_PATH}/arch/arm64/boot/dts/freescale/fsl-ls1043a-rdb.dtb ./bin_arm/kernel
-	sudo cp ${LSDK_PATH}/packages/rfs/initrd/rootfs_yocto_arm64_tiny.cpio.gz ./bin_arm/kernel
-	sudo cp ${LSDK_PATH}/packages/rfs/initrd/rootfs_buildroot_arm64_tiny.cpio.gz ./bin_arm/kernel
-	sudo cp ~/small.gz ./bin_arm/kernel
+	cp ${KERNEL_PATH}/arch/arm64/boot/dts/freescale/fsl-ls1043a-rdb-sdk-jailhouse.dtb ./bin_arm/kernel
+	cp ${KERNEL_PATH}/arch/arm64/boot/dts/freescale/fsl-ls1043a-rdb-sdk-jailhouse-with-dpaa.dtb ./bin_arm/kernel
+	cp ${KERNEL_PATH}/arch/arm64/boot/dts/freescale/fsl-ls1046a-rdb-sdk-jailhouse.dtb ./bin_arm/kernel
+	cp ${KERNEL_PATH}/arch/arm64/boot/dts/freescale/fsl-ls1046a-rdb-sdk-jailhouse-with-dpaa.dtb ./bin_arm/kernel
 	tar -cvzf bin_arm.tgz ./bin_arm/
 	#sudo cp bin_arm.tgz /var/www/html/image/
 

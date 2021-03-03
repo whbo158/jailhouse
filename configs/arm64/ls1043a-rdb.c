@@ -1,7 +1,7 @@
 /*
  * ls1043a RDB target - linux-demo
  *
- * Copyright 2020 NXP
+ * Copyright 2020-2021 NXP
  *
  * Authors:
  *  Hongbo Wang <hongbo.wang@nxp.com>
@@ -16,7 +16,7 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[61];
+	struct jailhouse_memory mem_regions[62];
 	struct jailhouse_irqchip irqchips[2];
 	struct jailhouse_pci_device pci_devices[2];
 } __attribute__((packed)) config = {
@@ -115,6 +115,13 @@ struct {
 			.phys_start = 0xc0900000,
 			.virt_start = 0xc0900000,
 			.size = 0x33700000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_EXECUTE,
+		},
+		/* RAM - FMAN ucode - root cell */ {
+			.phys_start = 0xf4000000,
+			.virt_start = 0xf4000000,
+			.size = 0xc000000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_EXECUTE,
 		},

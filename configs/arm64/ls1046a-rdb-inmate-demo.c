@@ -1,10 +1,11 @@
 /*
  * ls1046a RDB - inmate demo
  *
- * Copyright NXP 2020
+ * Copyright 2020-2021 NXP
  *
  * Authors:
  *  Jiafei Pan <jiafei.pan@nxp.com>
+ *  Hongbo Wang <hongbo.wang@nxp.com>
  *
  * This work is licensed under the terms of the GNU GPL, version 2.  See
  * the COPYING file in the top-level directory.
@@ -34,7 +35,7 @@ struct {
 
 		.console = {
 			.address = 0x21c0600,	/* Uart1 in DUART1 */
-			.divider = 0xbd, /* baudrate: 115200 */
+			.divider = 0xa3, /* baudrate: 115200 */
 			.type = JAILHOUSE_CON_TYPE_8250,
 			.flags = JAILHOUSE_CON_ACCESS_MMIO |
 				JAILHOUSE_CON_REGDIST_1,
@@ -47,34 +48,34 @@ struct {
 
 	.mem_regions = {
 		/* IVSHMEM shared memory region for 00:00.0 */ {
-			.phys_start = 0xfb700000,
-			.virt_start = 0xfb700000,
+			.phys_start = 0xc0500000,
+			.virt_start = 0xc0500000,
 			.size = 0x1000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xfb701000,
-			.virt_start = 0xfb701000,
+			.phys_start = 0xc0501000,
+			.virt_start = 0xc0501000,
 			.size = 0x9000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xfb70a000,
-			.virt_start = 0xfb70a000,
+			.phys_start = 0xc050a000,
+			.virt_start = 0xc050a000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xfb70c000,
-			.virt_start = 0xfb70c000,
+			.phys_start = 0xc050c000,
+			.virt_start = 0xc050c000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_ROOTSHARED,
 		},
 		{
-			.phys_start = 0xfb70e000,
-			.virt_start = 0xfb70e000,
+			.phys_start = 0xc050e000,
+			.virt_start = 0xc050e000,
 			.size = 0x2000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
 		},
@@ -86,7 +87,7 @@ struct {
 				JAILHOUSE_MEM_IO | JAILHOUSE_MEM_ROOTSHARED,
 		},
 		/* RAM: Top at 2GB DRAM1 Space */ {
-			.phys_start = 0xc0000000,
+			.phys_start = 0xc0900000,
 			.virt_start = 0,
 			.size = 0x00010000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
