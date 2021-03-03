@@ -2,9 +2,11 @@
 /*
  * Device Tree for inmate cell on NXP ls1046a RDB platform
  *
- * Copyright 2020 NXP
+ * Copyright 2020-2021 NXP
  *
  * Jiafei Pan <jiafei.pan@nxp.com>
+ *  Hongbo Wang <hongbo.wang@nxp.com>
+
  */
 
 /dts-v1/;
@@ -124,11 +126,6 @@
 			big-endian;
 		};
 
-		scfg: scfg@1570000 {
-			compatible = "fsl,ls1046a-scfg", "syscon";
-			reg = <0x0 0x1570000 0x0 0x10000>;
-			big-endian;
-		};
 
 		dcfg: dcfg@1ee0000 {
 			compatible = "fsl,ls1046a-dcfg", "syscon";

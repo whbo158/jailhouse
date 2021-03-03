@@ -1,7 +1,7 @@
 /*
  * ls1043a RDB target - linux-demo
  *
- * Copyright 2020 NXP
+ * Copyright 2020-2021 NXP
  *
  * Authors:
  *  Hongbo Wang <hongbo.wang@nxp.com>
