@@ -16,7 +16,7 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[75];
+	struct jailhouse_memory mem_regions[67];
 	struct jailhouse_irqchip irqchips[3];
 	struct jailhouse_pci_device pci_devices[2];
 } __attribute__((packed)) config = {
@@ -343,62 +343,6 @@ struct {
 		/* GPIO 3 */ {
 			.phys_start = 0x02320000,
 			.virt_start = 0x02320000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* FlexTimer 1 */ {
-			.phys_start = 0x02800000,
-			.virt_start = 0x02800000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* FlexTimer 2 */ {
-			.phys_start = 0x02810000,
-			.virt_start = 0x02810000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* FlexTimer 3 */ {
-			.phys_start = 0x02820000,
-			.virt_start = 0x02820000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* FlexTimer 4 */ {
-			.phys_start = 0x02830000,
-			.virt_start = 0x02830000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* FlexTimer 5 */ {
-			.phys_start = 0x02840000,
-			.virt_start = 0x02840000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* FlexTimer 6 */ {
-			.phys_start = 0x02850000,
-			.virt_start = 0x02850000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* FlexTimer 7 */ {
-			.phys_start = 0x02860000,
-			.virt_start = 0x02860000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* FlexTimer 8 */ {
-			.phys_start = 0x02870000,
-			.virt_start = 0x02870000,
 			.size = 0x10000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO,
