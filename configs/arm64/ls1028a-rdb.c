@@ -54,12 +54,12 @@ struct {
 			.cpu_set_size = sizeof(config.cpus),
 			.num_memory_regions = ARRAY_SIZE(config.mem_regions),
 			.num_irqchips = ARRAY_SIZE(config.irqchips),
-			.vpci_irq_base = 67 - 32, /* Not include 32 base */
+			.vpci_irq_base = 65 - 32, /* Not include 32 base */
 		},
 	},
 
 	.cpus = {
-		0xf,
+		0x3,
 	},
 
 	.mem_regions = {
