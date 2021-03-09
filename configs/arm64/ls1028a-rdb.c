@@ -16,7 +16,7 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[83];
+	struct jailhouse_memory mem_regions[77];
 	struct jailhouse_irqchip irqchips[3];
 	struct jailhouse_pci_device pci_devices[2];
 } __attribute__((packed)) config = {
@@ -120,6 +120,27 @@ struct {
 			.phys_start = 0x01080000,
 			.virt_start = 0x01080000,
 			.size =	          0x1000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+                /* ClockGen */ {
+                        .phys_start = 0x01300000,
+                        .virt_start = 0x01300000,
+                        .size = 0xa0000,
+                        .flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+                                JAILHOUSE_MEM_IO,
+                },
+		/* DCFG */ {
+			.phys_start = 0x01e00000,
+			.virt_start = 0x01e00000,
+			.size =	         0x10000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+		/* SCFG */ {
+			.phys_start = 0x01fc0000,
+			.virt_start = 0x01fc0000,
+			.size =	         0x10000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO,
 		},
@@ -424,6 +445,20 @@ struct {
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO,
 		},
+		/* SEC-crypto */ {
+			.phys_start = 0x08000000,
+			.virt_start = 0x08000000,
+			.size = 0x100000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+		/* qDMA */ {
+			.phys_start = 0x08380000,
+			.virt_start = 0x08380000,
+			.size = 0x60000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
 		/* LCD */ {
 			.phys_start = 0x0f080000,
 			.virt_start = 0x0f080000,
@@ -484,81 +519,9 @@ struct {
 
 
 
-		/* scfg */ {
-			.phys_start = 0x01570000,
-			.virt_start = 0x01570000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* crypto */ {
-			.phys_start = 0x01700000,
-			.virt_start = 0x01700000,
-			.size = 0x100000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* qman */ {
-			.phys_start = 0x01880000,
-			.virt_start = 0x01880000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-                /* bman */ {
-                        .phys_start = 0x01890000,
-                        .virt_start = 0x01890000,
-                        .size = 0x10000,
-                        .flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-                                JAILHOUSE_MEM_IO,
-                },
-		/* fman */ {
-			.phys_start = 0x01a00000,
-			.virt_start = 0x01a00000,
-			.size = 0x100000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* qportals CE */ {
-			.phys_start = 0x500000000,
-			.virt_start = 0x500000000,
-			.size = 0x4000000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
-		},
-		/* qportals CI */ {
-			.phys_start = 0x504000000,
-			.virt_start = 0x504000000,
-			.size = 0x4000000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* bportals CE */ {
-			.phys_start = 0x508000000,
-			.virt_start = 0x508000000,
-			.size = 0x4000000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
-		},
-		/* bportals CI */ {
-			.phys_start = 0x50c000000,
-			.virt_start = 0x50c000000,
-			.size = 0x4000000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* dcfg */ {
-			.phys_start = 0x01ee0000,
-			.virt_start = 0x01ee0000,
-			.size = 0x1000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-                /* clockgen */ {
-                        .phys_start = 0x01ee1000,
-                        .virt_start = 0x01ee1000,
-                        .size = 0x1000,
-                        .flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-                                JAILHOUSE_MEM_IO,
-                },
+
+
+
 		/* rcpm */ {
 			.phys_start = 0x01ee2000,
 			.virt_start = 0x01ee2000,
