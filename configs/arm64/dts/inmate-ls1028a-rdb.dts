@@ -79,26 +79,32 @@
 
 	timer {
 		compatible = "arm,armv8-timer";
-		interrupts = <GIC_PPI 13 (GIC_CPU_MASK_RAW(0xf) |
+		interrupts = <GIC_PPI 13 (GIC_CPU_MASK_SIMPLE(2) |
 					  IRQ_TYPE_LEVEL_LOW)>,
-			     <GIC_PPI 14 (GIC_CPU_MASK_RAW(0xf) |
+			     <GIC_PPI 14 (GIC_CPU_MASK_SIMPLE(2) |
 					  IRQ_TYPE_LEVEL_LOW)>,
-			     <GIC_PPI 11 (GIC_CPU_MASK_RAW(0xf) |
+			     <GIC_PPI 11 (GIC_CPU_MASK_SIMPLE(2) |
 					  IRQ_TYPE_LEVEL_LOW)>,
-			     <GIC_PPI 10 (GIC_CPU_MASK_RAW(0xf) |
+			     <GIC_PPI 10 (GIC_CPU_MASK_SIMPLE(2) |
 					  IRQ_TYPE_LEVEL_LOW)>;
 	};
 
-	gic: interrupt-controller@1410000 {
-		compatible = "arm,gic-400";
-		#interrupt-cells = <3>;
+	gic: interrupt-controller@6000000 {
+		compatible= "arm,gic-v3";
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+		reg= <0x0 0x06000000 0 0x10000>, /* GIC Dist */
+			<0x0 0x06040000 0 0x40000>; /* GIC Redistributor */
+		#interrupt-cells= <3>;
 		interrupt-controller;
-		reg = <0x0 0x1410000 0 0x10000>, /* GICD */
-		      <0x0 0x142f000 0 0x1000>, /* GICC */
-		      <0x0 0x1440000 0 0x20000>, /* GICH */
-		      <0x0 0x146f000 0 0x1000>; /* GICV */
 		interrupts = <GIC_PPI 9 (GIC_CPU_MASK_RAW(0xf) |
 					 IRQ_TYPE_LEVEL_LOW)>;
+		its: gic-its@6020000 {
+			compatible = "arm,gic-v3-its";
+			msi-controller;
+			reg = <0x0 0x06020000 0 0x20000>;/* GIC Translater */
+		};
 	};
 
 	soc: soc {
@@ -148,10 +154,10 @@
 		#size-cells = <2>;
 		#interrupt-cells = <1>;
 		interrupt-map-mask = <0 0 0 7>;
-		interrupt-map = <0 0 0 1 &gic GIC_SPI 28 IRQ_TYPE_EDGE_RISING>,
-			<0 0 0 2 &gic GIC_SPI 29 IRQ_TYPE_EDGE_RISING>,
-			<0 0 0 3 &gic GIC_SPI 30 IRQ_TYPE_EDGE_RISING>,
-			<0 0 0 4 &gic GIC_SPI 31 IRQ_TYPE_EDGE_RISING>;
+		interrupt-map = <0 0 0 1 &gic GIC_SPI 65 IRQ_TYPE_EDGE_RISING>,
+			<0 0 0 2 &gic GIC_SPI 66 IRQ_TYPE_EDGE_RISING>,
+			<0 0 0 3 &gic GIC_SPI 67 IRQ_TYPE_EDGE_RISING>,
+			<0 0 0 4 &gic GIC_SPI 68 IRQ_TYPE_EDGE_RISING>;
 		reg = <0x0 0xc0700000 0x0 0x100000>;
 		ranges = <0x02000000 0x00 0x10000000 0x0 0x10000000 0x00 0x10000>;
 	};
