@@ -112,9 +112,6 @@
 		#address-cells = <2>;
 		#size-cells = <2>;
 		ranges;
-		dma-ranges = <0x0 0x0 0x0 0x0 0x10000 0x00000000>;
-		dma-coherent;
-
 
 		ddr: memory-controller@1080000 {
 			compatible = "fsl,qoriq-memory-controller";
@@ -123,16 +120,15 @@
 			big-endian;
 		};
 
-
-		dcfg: dcfg@1ee0000 {
-			compatible = "fsl,ls1046a-dcfg", "syscon";
-			reg = <0x0 0x1ee0000 0x0 0x1000>;
-			big-endian;
+		dcfg: syscon@1e00000 {
+			compatible = "fsl,ls1028a-dcfg", "syscon";
+			reg = <0x0 0x1e00000 0x0 0x10000>;
+			little-endian;
 		};
 
-		clockgen: clocking@1ee1000 {
-			compatible = "fsl,ls1046a-clockgen";
-			reg = <0x0 0x1ee1000 0x0 0x1000>;
+		clockgen: clock-controller@1300000 {
+			compatible = "fsl,ls1028a-clockgen";
+			reg = <0x0 0x1300000 0x0 0xa0000>;
 			#clock-cells = <2>;
 			clocks = <&sysclk>;
 		};
@@ -143,7 +139,6 @@
 			clocks = <&clockgen 4 1>;
 			status = "okay";
 		};
-
 	};
 
 	pci@c0700000 {
