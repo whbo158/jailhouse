@@ -16,7 +16,7 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[82];
+	struct jailhouse_memory mem_regions[75];
 	struct jailhouse_irqchip irqchips[3];
 	struct jailhouse_pci_device pci_devices[2];
 } __attribute__((packed)) config = {
@@ -547,69 +547,6 @@ struct {
 			.phys_start = 0x0f200000,
 			.virt_start = 0x0f200000,
 			.size = 0x100000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-
-
-
-
-
-
-		/* rcpm */ {
-			.phys_start = 0x01ee2000,
-			.virt_start = 0x01ee2000,
-			.size = 0x1000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* tmu */ {
-			.phys_start = 0x01f00000,
-			.virt_start = 0x01f00000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-
-		/* duart2 */ {
-			.phys_start = 0x021d0000,
-			.virt_start = 0x021d0000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-
-
-
-		/* wdog0 */ {
-			.phys_start = 0x02ad0000,
-			.virt_start = 0x02ad0000,
-			.size = 0x10000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-
-
-
-
-		/* PCI host bridge 0 */ {
-			.phys_start = 0x4000000000,
-			.virt_start = 0x4000000000,
-			.size = 0x800000000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* PCI host bridge 1 */ {
-			.phys_start = 0x4800000000,
-			.virt_start = 0x4800000000,
-			.size = 0x800000000,
-			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
-		},
-		/* PCI host bridge 2 */ {
-			.phys_start = 0x5000000000,
-			.virt_start = 0x5000000000,
-			.size = 0x800000000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO,
 		},
