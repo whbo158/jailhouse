@@ -150,9 +150,9 @@
 		#interrupt-cells = <1>;
 		interrupt-map-mask = <0 0 0 7>;
 		interrupt-map = <0 0 0 1 &gic GIC_SPI 65 IRQ_TYPE_EDGE_RISING>,
-			<0 0 0 2 &gic GIC_SPI 66 IRQ_TYPE_EDGE_RISING>,
-			<0 0 0 3 &gic GIC_SPI 67 IRQ_TYPE_EDGE_RISING>,
-			<0 0 0 4 &gic GIC_SPI 68 IRQ_TYPE_EDGE_RISING>;
+				<0 0 0 2 &gic GIC_SPI 66 IRQ_TYPE_EDGE_RISING>,
+				<0 0 0 3 &gic GIC_SPI 67 IRQ_TYPE_EDGE_RISING>,
+				<0 0 0 4 &gic GIC_SPI 68 IRQ_TYPE_EDGE_RISING>;
 		reg = <0x0 0xc0700000 0x0 0x100000>;
 		ranges = <0x02000000 0x00 0x10000000 0x0 0x10000000 0x00 0x10000>;
 	};
