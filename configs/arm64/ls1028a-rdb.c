@@ -16,7 +16,7 @@
 struct {
 	struct jailhouse_system header;
 	__u64 cpus[1];
-	struct jailhouse_memory mem_regions[67];
+	struct jailhouse_memory mem_regions[73];
 	struct jailhouse_irqchip irqchips[3];
 	struct jailhouse_pci_device pci_devices[2];
 } __attribute__((packed)) config = {
@@ -493,6 +493,48 @@ struct {
 			.size = 0x100000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO,
+		},
+		/* for root cell */ {
+			.phys_start = 0x0f300000,
+			.virt_start = 0x0f300000,
+			.size = 0xd00000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+		/* for root cell pcie */ {
+			.phys_start = 0x1f0000000,
+			.virt_start = 0x1f0000000,
+			.size = 0xd000000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+		/* for root cell */ {
+			.phys_start = 0x700100000,
+			.virt_start = 0x700100000,
+			.size = 0x1000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_IO,
+		},
+		/* System RAM */ {
+			.phys_start = 0x2080000000,
+			.virt_start = 0x2080000000,
+			.size = 0x80000000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_EXECUTE,
+		},
+		/* MEM */ {
+			.phys_start = 0x8040000000,
+			.virt_start = 0x8040000000,
+			.size = 0x40000000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_EXECUTE,
+		},
+		/* MEM */ {
+			.phys_start = 0x8840000000,
+			.virt_start = 0x8840000000,
+			.size = 0x40000000,
+			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
+				JAILHOUSE_MEM_EXECUTE,
 		},
 	},
 
