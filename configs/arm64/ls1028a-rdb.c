@@ -495,11 +495,11 @@ struct {
 				JAILHOUSE_MEM_IO,
 		},
 		/* for root cell */ {
-			.phys_start = 0x0f300000,
-			.virt_start = 0x0f300000,
-			.size = 0xd00000,
+			.phys_start = 0xf4000000,
+			.virt_start = 0xf4000000,
+			.size = 0xc000000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
+				JAILHOUSE_MEM_EXECUTE,
 		},
 		/* for root cell pcie */ {
 			.phys_start = 0x1f0000000,
