@@ -34,7 +34,7 @@ struct {
 	},
 
 	.cpus = {
-		0xc,
+		0x2,
 	},
 
 	.mem_regions = {

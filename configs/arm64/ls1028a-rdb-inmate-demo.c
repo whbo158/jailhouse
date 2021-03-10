@@ -34,7 +34,7 @@ struct {
 
 		.console = {
 			.address = 0x21c0600,	/* Uart1 in DUART1 */
-			.divider = 0xa3, /* baudrate: 115200 */
+			.divider = 0x6d, /* baudrate: 115200 */
 			.type = JAILHOUSE_CON_TYPE_8250,
 			.flags = JAILHOUSE_CON_ACCESS_MMIO |
 				JAILHOUSE_CON_REGDIST_1,
