@@ -70,6 +70,19 @@
 		clock-output-names = "sysclk";
 	};
 
+	osc_27m: clock-osc-27m {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <27000000>;
+		clock-output-names = "phy_27m";
+	};
+
+	sys_mclk: clock-mclk {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <25000000>;
+	};
+
 	reboot {
 		compatible ="syscon-reboot";
 		regmap = <&dcfg>;
@@ -87,6 +100,11 @@
 					  IRQ_TYPE_LEVEL_LOW)>,
 			     <GIC_PPI 10 (GIC_CPU_MASK_SIMPLE(2) |
 					  IRQ_TYPE_LEVEL_LOW)>;
+	};
+
+	pmu {
+		compatible = "arm,cortex-a72-pmu";
+		interrupts = <GIC_PPI 7 IRQ_TYPE_LEVEL_HIGH>;
 	};
 
 	gic: interrupt-controller@6000000 {
@@ -148,17 +166,18 @@
 		#address-cells = <3>;
 		#size-cells = <2>;
 		#interrupt-cells = <1>;
+		msi-parent = <&its>;
 		interrupt-map-mask = <0 0 0 7>;
-		interrupt-map = <0 0 0 1 &gic GIC_SPI 65 IRQ_TYPE_EDGE_RISING>,
-				<0 0 0 2 &gic GIC_SPI 66 IRQ_TYPE_EDGE_RISING>,
-				<0 0 0 3 &gic GIC_SPI 67 IRQ_TYPE_EDGE_RISING>,
-				<0 0 0 4 &gic GIC_SPI 68 IRQ_TYPE_EDGE_RISING>;
+		interrupt-map = <0 0 0 1 &gic 0 0 GIC_SPI 65 IRQ_TYPE_EDGE_RISING>,
+				<0 0 0 2 &gic 0 0 GIC_SPI 66 IRQ_TYPE_EDGE_RISING>,
+				<0 0 0 3 &gic 0 0 GIC_SPI 67 IRQ_TYPE_EDGE_RISING>,
+				<0 0 0 4 &gic 0 0 GIC_SPI 68 IRQ_TYPE_EDGE_RISING>;
 		reg = <0x0 0xc0700000 0x0 0x100000>;
 		ranges = <0x02000000 0x00 0x10000000 0x0 0x10000000 0x00 0x10000>;
 	};
 
 	psci {
-		compatible = "arm,psci-1.0";
+		compatible = "arm,psci-1.0", "arm,psci-0.2";
 		method = "smc";
 	};
 

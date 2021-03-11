@@ -84,21 +84,21 @@ struct {
                         .virt_start = 0x01300000,
                         .size = 0xa0000,
                         .flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-                                JAILHOUSE_MEM_IO,
+				JAILHOUSE_MEM_IO | JAILHOUSE_MEM_ROOTSHARED,
                 },
 		/* DCFG */ {
 			.phys_start = 0x01e00000,
 			.virt_start = 0x01e00000,
 			.size = 0x10000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
+				JAILHOUSE_MEM_IO | JAILHOUSE_MEM_ROOTSHARED,
 		},
 		/* GITS */ {
 			.phys_start = 0x06020000,
 			.virt_start = 0x06020000,
 			.size = 0x10000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
-				JAILHOUSE_MEM_IO,
+				JAILHOUSE_MEM_IO | JAILHOUSE_MEM_ROOTSHARED,
 		},
 		/* RAM */ {
 			.phys_start = 0xc0400000,
