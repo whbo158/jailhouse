@@ -12,8 +12,8 @@
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 
 / {
-	compatible = "fsl,ls1028a";
 	model = "LS1028A RDB Board";
+	compatible = "fsl,ls1028a-rdb", "fsl,ls1028a";
 	interrupt-parent = <&gic>;
 	#address-cells = <2>;
 	#size-cells = <2>;
@@ -301,4 +301,39 @@
 		method = "smc";
 	};
 
+};
+
+&enetc_port0 {
+	phy-handle = <&sgmii_phy0>;
+	phy-connection-type = "sgmii";
+
+	mdio {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		sgmii_phy0: ethernet-phy@2 {
+			reg = <0x2>;
+		};
+	};
+};
+
+&enetc_port1 {
+	status = "disabled";
+};
+
+&enetc_mdio_pf3 {
+	qsgmii_phy1: ethernet-phy@10 {
+		reg = <0x10>;
+	};
+
+	qsgmii_phy2: ethernet-phy@11 {
+		reg = <0x11>;
+	};
+
+	qsgmii_phy3: ethernet-phy@12 {
+		reg = <0x12>;
+	};
+
+	qsgmii_phy4: ethernet-phy@13 {
+		reg = <0x13>;
+	};
 };
