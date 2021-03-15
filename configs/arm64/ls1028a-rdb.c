@@ -515,7 +515,7 @@ struct {
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_EXECUTE,
 		},
-		/* for root cell pcie */ {
+		/* for enetc pcie */ {
 			.phys_start = 0x1f0000000,
 			.virt_start = 0x1f0000000,
 			.size = 0xd000000,
