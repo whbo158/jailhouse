@@ -66,6 +66,7 @@ cpb:
 	cp ./configs/arm64/dts/inmate-ls1028a-rdb.dtb ./bin_arm/
 	cp ${KERNEL_PATH}/arch/arm64/boot/Image.gz ./bin_arm/
 	cp ${KERNEL_PATH}/arch/arm64/boot/Image ./bin_arm/
+	cp /mnt/vda3/jailhouse_0301/Image-1028 ./bin_arm/
 	sudo cp -fr ./bin_arm_base/scripts ./bin_arm/
 	sudo cp ./bin_arm_base/rootfs.cpio.gz ./bin_arm/
 
