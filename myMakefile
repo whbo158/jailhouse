@@ -45,6 +45,7 @@ cpb:
 	cp ./inmates/demos/arm64/ivshmem-demo.bin ./bin_arm/
 	cp ./tools/bin_arm/usr/local/sbin/ivshmem-demo ./bin_arm/
 	cp ./tools/jailhouse ./bin_arm/
+	cp ./cmd.sh ./bin_arm/
 	cp -fr ./tools/bin_arm/usr/local/libexec/jailhouse/jailhouse-cell-linux ./bin_arm/
 	cp -fr ./tools/bin_arm/usr/local/libexec/jailhouse/jailhouse-cell-stats ./bin_arm/
 	cp ./driver/jailhouse.ko ./bin_arm/
@@ -63,7 +64,9 @@ cpb:
 	cp ./configs/arm64/ls1028a-rdb.cell ./bin_arm/
 	cp ./configs/arm64/ls1028a-rdb-inmate-demo.cell ./bin_arm/
 	cp ./configs/arm64/ls1028a-rdb-linux-demo.cell ./bin_arm/
+	cp ./configs/arm64/ls1028a-rdb-enetc-linux-demo.cell ./bin_arm/
 	cp ./configs/arm64/dts/inmate-ls1028a-rdb.dtb ./bin_arm/
+	cp ./configs/arm64/dts/inmate-ls1028a-rdb-enetc.dtb ./bin_arm/
 	cp ${KERNEL_PATH}/arch/arm64/boot/Image.gz ./bin_arm/
 	cp ${KERNEL_PATH}/arch/arm64/boot/Image ./bin_arm/
 	cp /mnt/vda3/jailhouse_0301/Image-1028 ./bin_arm/
