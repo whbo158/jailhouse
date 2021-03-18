@@ -286,7 +286,6 @@
 		#address-cells = <3>;
 		#size-cells = <2>;
 		#interrupt-cells = <1>;
-		msi-parent = <&its>;
 		interrupt-map-mask = <0 0 0 7>;
 		interrupt-map = <0 0 0 1 &gic 0 0 GIC_SPI 65 IRQ_TYPE_EDGE_RISING>,
 				<0 0 0 2 &gic 0 0 GIC_SPI 66 IRQ_TYPE_EDGE_RISING>,
@@ -306,6 +305,7 @@
 &enetc_port0 {
 	phy-handle = <&sgmii_phy0>;
 	phy-connection-type = "sgmii";
+	local-mac-address = [0e 09 00 01 03 05];
 
 	mdio {
 		#address-cells = <1>;

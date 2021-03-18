@@ -96,7 +96,7 @@ struct {
 		/* GITS */ {
 			.phys_start = 0x06020000,
 			.virt_start = 0x06020000,
-			.size = 0x10000,
+			.size = 0x20000,
 			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
 				JAILHOUSE_MEM_IO | JAILHOUSE_MEM_ROOTSHARED,
 		},
