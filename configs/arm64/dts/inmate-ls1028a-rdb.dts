@@ -116,7 +116,7 @@
 		};
 	};
 
-	pci@fb500000 {
+	pci@c0700000 {
 		compatible = "pci-host-ecam-generic";
 		device_type = "pci";
 		bus-range = <0 0>;
@@ -128,7 +128,7 @@
 			<0 0 0 2 &gic GIC_SPI 9 IRQ_TYPE_EDGE_RISING>,
 			<0 0 0 3 &gic GIC_SPI 10 IRQ_TYPE_EDGE_RISING>,
 			<0 0 0 4 &gic GIC_SPI 11 IRQ_TYPE_EDGE_RISING>;
-		reg = <0x0 0xfb500000 0x0 0x100000>;
+		reg = <0x0 0xc0700000 0x0 0x100000>;
 		ranges = <0x02000000 0x00 0x10000000 0x0 0x10000000 0x00 0x10000>;
 	};
 
