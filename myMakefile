@@ -49,27 +49,38 @@ cpb:
 	cp -fr ./tools/bin_arm/usr/local/libexec/jailhouse/jailhouse-cell-linux ./bin_arm/
 	cp -fr ./tools/bin_arm/usr/local/libexec/jailhouse/jailhouse-cell-stats ./bin_arm/
 	cp ./driver/jailhouse.ko ./bin_arm/
+
 	cp ./configs/arm64/ls1043a-rdb.cell ./bin_arm/
 	cp ./configs/arm64/ls1043a-rdb-inmate-demo.cell ./bin_arm/
 	cp ./configs/arm64/ls1043a-rdb-linux-demo.cell ./bin_arm/
 	cp ./configs/arm64/ls1043a-rdb-dpaa-linux-demo.cell ./bin_arm/
 	cp ./configs/arm64/dts/inmate-ls1043a-rdb.dtb ./bin_arm/
 	cp ./configs/arm64/dts/inmate-ls1043a-rdb-dpaa.dtb ./bin_arm/
+
 	cp ./configs/arm64/ls1046a-rdb.cell ./bin_arm/
 	cp ./configs/arm64/ls1046a-rdb-inmate-demo.cell ./bin_arm/
 	cp ./configs/arm64/ls1046a-rdb-linux-demo.cell ./bin_arm/
 	cp ./configs/arm64/ls1046a-rdb-dpaa-linux-demo.cell ./bin_arm/
 	cp ./configs/arm64/dts/inmate-ls1046a-rdb.dtb ./bin_arm/
 	cp ./configs/arm64/dts/inmate-ls1046a-rdb-dpaa.dtb ./bin_arm/
+
 	cp ./configs/arm64/ls1028a-rdb.cell ./bin_arm/
 	cp ./configs/arm64/ls1028a-rdb-inmate-demo.cell ./bin_arm/
 	cp ./configs/arm64/ls1028a-rdb-linux-demo.cell ./bin_arm/
 	cp ./configs/arm64/ls1028a-rdb-enetc-linux-demo.cell ./bin_arm/
 	cp ./configs/arm64/dts/inmate-ls1028a-rdb.dtb ./bin_arm/
 	cp ./configs/arm64/dts/inmate-ls1028a-rdb-enetc.dtb ./bin_arm/
+
+	cp ./configs/arm64/imx8mp.cell ./bin_arm/
+	cp ./configs/arm64/imx8mp-inmate-demo.cell ./bin_arm/
+	cp ./configs/arm64/imx8mp-linux-demo.cell ./bin_arm/
+	cp ./configs/arm64/dts/inmate-imx8mp-evk.dtb ./bin_arm/
+
 	cp ${KERNEL_PATH}/arch/arm64/boot/Image.gz ./bin_arm/
 	cp ${KERNEL_PATH}/arch/arm64/boot/Image ./bin_arm/
 	cp /mnt/vda3/jailhouse_0301/Image-1028 ./bin_arm/
+	cp /mnt/vda3/jailhouse_0301/Image-imx ./bin_arm/
+
 	sudo cp -fr ./bin_arm_base/scripts ./bin_arm/
 	sudo cp ./bin_arm_base/rootfs.cpio.gz ./bin_arm/
 
@@ -78,7 +89,7 @@ cpb:
 	cp ${KERNEL_PATH}/arch/arm64/boot/dts/freescale/fsl-ls1043a-rdb-sdk-jailhouse-with-dpaa.dtb ./bin_arm/kernel
 	cp ${KERNEL_PATH}/arch/arm64/boot/dts/freescale/fsl-ls1046a-rdb-sdk-jailhouse.dtb ./bin_arm/kernel
 	cp ${KERNEL_PATH}/arch/arm64/boot/dts/freescale/fsl-ls1046a-rdb-sdk-jailhouse-with-dpaa.dtb ./bin_arm/kernel
-	tar -cvzf bin_arm.tgz ./bin_arm/
+	tar -cvf bin_arm.tar ./bin_arm/
 	#sudo cp bin_arm.tgz /var/www/html/image/
 
 jailx86:
