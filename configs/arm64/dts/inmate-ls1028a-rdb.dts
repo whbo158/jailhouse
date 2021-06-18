@@ -114,6 +114,21 @@
 			clocks = <&clockgen 4 1>;
 			status = "okay";
 		};
+
+		esdhc1: mmc@2150000 {
+			compatible = "fsl,ls1028a-esdhc", "fsl,esdhc";
+			reg = <0x0 0x2150000 0x0 0x10000>;
+			interrupts = <GIC_SPI 63 IRQ_TYPE_LEVEL_HIGH>;
+			clock-frequency = <200000000>;
+			clocks = <&clockgen 2 1>;
+			voltage-ranges = <1800 1800 3300 3300>;
+			sdhci,auto-cmd12;
+			broken-cd;
+			little-endian;
+			mmc-hs200-1_8v;
+			bus-width = <8>;
+			status = "okay";
+		};
 	};
 
 	pci@c0700000 {
@@ -136,4 +151,6 @@
 		compatible = "arm,psci-1.0", "arm,psci-0.2";
 		method = "smc";
 	};
+
+
 };
